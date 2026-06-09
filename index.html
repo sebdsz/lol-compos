@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Draft Board — Compos LoL 5v5 · Patch 26.11</title>
+
+<!-- ============================================================
+     APERÇU DE LIEN (Open Graph / Twitter) — Discord, WhatsApp, etc.
+     APRÈS DÉPLOIEMENT : remplace les 4 occurrences de
+     https://TON-DOMAINE par ton URL réelle
+     (ex. https://ton-pseudo.github.io/lol-compos).
+     Sans image, l'aperçu affiche quand même titre + description.
+     Pour une vignette : ajoute un fichier og-image.png (1200×630)
+     à côté de cette page (je peux te le générer si tu veux).
+     ============================================================ -->
+<meta name="description" content="12 compositions 5v5 pour League of Legends (patch 26.11) : ultra early, mid/late et scale & safe — picks flex, bans prioritaires et plans de jeu avec timings d'objectifs.">
+<meta name="theme-color" content="#7c5cff">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Draft Board">
+<meta property="og:title" content="Draft Board — 12 compos LoL 5v5 (Patch 26.11)">
+<meta property="og:description" content="Early · Mid/Late · Scale & Safe — picks flex, bans prioritaires et plans de jeu avec timings d'objectifs. Pour jouer en flex entre potes.">
+<meta property="og:url" content="https://TON-DOMAINE/">
+<meta property="og:image" content="https://TON-DOMAINE/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Draft Board — compositions LoL 5v5">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Draft Board — 12 compos LoL 5v5 (Patch 26.11)">
+<meta name="twitter:description" content="Early · Mid/Late · Scale & Safe — picks flex, bans prioritaires et plans de jeu avec timings d'objectifs.">
+<meta name="twitter:image" content="https://TON-DOMAINE/og-image.png">
+
+<style>
+  :root{
+    --bg:#f5f6f8; --surface:#ffffff; --surface2:#fbfbfc; --raised:#f3f4f7;
+    --line:#e7e9ee; --line2:#d8dbe2;
+    --ink:#191c22; --ink2:#3a3f4a; --mute:#6b7180; --mute2:#9aa0ad;
+    --early:#e5484d; --mid:#7c5cff; --scale:#0fa968;
+    --amber:#b5760a; --ban:#e5484d;
+    --sans:"Inter","Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Code","Cascadia Mono",Consolas,"Liberation Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--sans); font-size:15px; line-height:1.5;
+    -webkit-font-smoothing:antialiased; padding-bottom:80px;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:30;
+    background:rgba(245,246,248,.82); backdrop-filter:blur(12px) saturate(140%);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .row{
+    max-width:1320px; margin:0 auto; padding:15px 22px;
+    display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+  .brand{display:flex; flex-direction:column; gap:3px; margin-right:auto}
+  .brand .t{
+    font-family:var(--mono); font-weight:700; font-size:13.5px;
+    letter-spacing:.32em; text-transform:uppercase; color:var(--ink);
+  }
+  .brand .s{font-family:var(--mono); font-size:11px; letter-spacing:.04em; color:var(--mute)}
+  .brand .s b{color:var(--scale); font-weight:600}
+
+  .seg{display:flex; gap:2px; padding:3px; border:1px solid var(--line); border-radius:10px; background:var(--surface)}
+  .seg button{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase;
+    font-weight:600; cursor:pointer; color:var(--mute); background:transparent; border:none;
+    padding:8px 14px; border-radius:7px; transition:.16s;
+  }
+  .seg button:hover{color:var(--ink); background:var(--raised)}
+  .seg button.active{color:#fff; background:var(--ink)}
+  .seg button[data-cat="early"].active{background:var(--early)}
+  .seg button[data-cat="mid"].active{background:var(--mid)}
+  .seg button[data-cat="scale"].active{background:var(--scale)}
+
+  .search{position:relative; display:flex; align-items:center}
+  .search input{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.03em; color:var(--ink);
+    background:var(--surface); border:1px solid var(--line); border-radius:9px;
+    padding:9px 30px 9px 32px; width:230px; max-width:54vw; outline:none; transition:.16s;
+  }
+  .search input::placeholder{color:var(--mute2); text-transform:lowercase}
+  .search input:focus{border-color:var(--line2); box-shadow:0 0 0 3px rgba(124,92,255,.12)}
+  .search .ic{position:absolute; left:11px; color:var(--mute2); font-size:13px; pointer-events:none}
+  .search .clr{position:absolute; right:8px; border:none; background:none; color:var(--mute2); font-size:16px; cursor:pointer; line-height:1; padding:2px}
+  .search .clr:hover{color:var(--ink)}
+
+  /* ---------- meta strip ---------- */
+  .strip{
+    max-width:1320px; margin:0 auto; padding:16px 22px 2px;
+    display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+  }
+  .strip .count{font-family:var(--mono); font-size:12px; color:var(--mute); letter-spacing:.04em}
+  .strip .legend{display:flex; gap:16px; font-family:var(--mono); font-size:11px; color:var(--mute); letter-spacing:.03em}
+  .strip .legend i{display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:6px; vertical-align:1px}
+  .lg-early i{background:var(--early)} .lg-mid i{background:var(--mid)} .lg-scale i{background:var(--scale)}
+
+  /* ---------- grid / cards ---------- */
+  .grid{
+    max-width:1320px; margin:0 auto; padding:18px 22px;
+    display:grid; gap:16px; grid-template-columns:repeat(auto-fill,minmax(370px,1fr));
+  }
+  @media(max-width:520px){.grid{grid-template-columns:1fr; padding:14px}}
+
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px; overflow:hidden;
+    box-shadow:0 1px 2px rgba(20,22,28,.04); transition:border-color .16s, box-shadow .16s, transform .16s;
+  }
+  .card[data-cat="early"]{--ac:var(--early)}
+  .card[data-cat="mid"]{--ac:var(--mid)}
+  .card[data-cat="scale"]{--ac:var(--scale)}
+  .card:hover{border-color:var(--line2); box-shadow:0 10px 28px -14px rgba(20,22,28,.28)}
+
+  .head{padding:18px 20px 16px; cursor:pointer; user-select:none}
+  .toprow{display:flex; align-items:flex-start; gap:14px}
+  .titlewrap{flex:1; min-width:0}
+  .kicker{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; margin-bottom:7px}
+  .kicker .kcat{color:var(--ac); font-weight:700}
+  .kicker .knum{color:var(--mute2); margin-left:7px}
+  .name{font-size:18px; font-weight:800; letter-spacing:-.015em; line-height:1.16; text-transform:uppercase; margin:0 0 4px; color:var(--ink)}
+  .arch{font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; color:var(--mute)}
+
+  .diff{
+    flex-shrink:0; font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--mute); display:flex; align-items:center; gap:6px;
+    padding:5px 9px; border:1px solid var(--line); border-radius:6px; background:var(--surface2);
+  }
+  .diff i{width:6px; height:6px; border-radius:50%; background:var(--amber)}
+  .diff[data-d="Élevée"] i{background:var(--early)}
+  .diff[data-d="Moyenne"] i{background:var(--amber)}
+  .diff[data-d="Faible"] i{background:var(--scale)}
+
+  .roles{margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:9px; overflow:hidden}
+  .rcell{background:var(--surface); padding:9px 12px; display:flex; flex-direction:column; gap:2px}
+  .rcell.full{grid-column:1/-1; background:var(--surface2)}
+  .rcell .rk{font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--mute2)}
+  .rcell .rv .mn{font-size:14px; font-weight:600; color:var(--ink)}
+  .rcell .rv .alt{display:none}
+
+  .midrow{margin-top:14px; padding-top:14px; border-top:1px solid var(--line);
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+  .kv{font-family:var(--mono); font-size:11.5px; letter-spacing:.03em; color:var(--mute); display:flex; align-items:center}
+  .kv .k{color:var(--mute2); text-transform:uppercase; letter-spacing:.12em; font-size:10px; margin-right:6px}
+  .kv.ban .v{color:var(--ban); font-weight:700}
+  .kv.spike .v{color:var(--ink); font-weight:600}
+  .bmore{font-family:var(--mono); font-size:9.5px; font-weight:700; color:var(--ban); margin-left:6px;
+    border:1px solid color-mix(in srgb,var(--ban) 35%,transparent); border-radius:4px; padding:1px 5px; letter-spacing:0}
+  .expand{margin-left:auto; font-family:var(--mono); font-size:11px; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--mute); background:none; border:none; cursor:pointer; display:flex; align-items:center; gap:6px; padding:4px 0}
+  .expand:hover{color:var(--ink)}
+  .expand .chev{transition:transform .2s}
+  .card.open .expand .chev{transform:rotate(180deg)}
+  .card.open .expand .lbl-more{display:none}
+  .expand .lbl-less{display:none}
+  .card.open .expand .lbl-less{display:inline}
+
+  .details{display:grid; grid-template-rows:0fr; transition:grid-template-rows .26s ease; border-top:1px solid transparent}
+  .card.open .details{grid-template-rows:1fr; border-top-color:var(--line)}
+  .details > .inner{overflow:hidden}
+  .dpad{padding:16px 20px 20px; display:flex; flex-direction:column; gap:16px; background:var(--surface2)}
+  .card.open .rcell .rv .alt{display:block; font-family:var(--mono); font-size:11px; color:var(--mute); letter-spacing:.02em; margin-top:2px}
+
+  .block .bk{font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--mute2); margin-bottom:6px; display:flex; align-items:center; gap:8px}
+  .block .bk::after{content:""; flex:1; height:1px; background:var(--line)}
+  .block p{margin:0; font-size:14px; line-height:1.55; color:var(--ink2)}
+
+  /* ---------- timeline (plan de jeu) ---------- */
+  .tl{margin-top:10px}
+  .tl-row{position:relative; padding:0 0 13px 20px}
+  .tl-row:last-child{padding-bottom:0}
+  .tl-row::before{content:""; position:absolute; left:3px; top:6px; bottom:-4px; width:1px; background:var(--line)}
+  .tl-row:last-child::before{display:none}
+  .tl-row::after{content:""; position:absolute; left:0; top:4px; width:7px; height:7px; border-radius:50%;
+    background:var(--ac); box-shadow:0 0 0 3px var(--surface2)}
+  .tl-t{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.03em; color:var(--ink)}
+  .tl-x{font-size:13px; line-height:1.5; color:var(--ink2); margin-top:1px}
+  .tl-x b{color:var(--ink); font-weight:600}
+
+  /* ---------- draft ---------- */
+  .dlist{margin-top:4px}
+  .d-row{display:grid; grid-template-columns:74px 1fr; gap:10px; align-items:start; font-size:13px; line-height:1.5; color:var(--ink2)}
+  .d-row + .d-row{margin-top:9px}
+  .d-row b{color:var(--ink); font-weight:700}
+  .d-tag{font-family:var(--mono); font-size:9px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    padding:3px 0; border-radius:5px; text-align:center; white-space:nowrap; margin-top:1px}
+  .d-first{color:#0a7d4e; background:rgba(15,169,104,.12); border:1px solid rgba(15,169,104,.30)}
+  .d-last{color:#9a6406; background:rgba(181,118,10,.12); border:1px solid rgba(181,118,10,.30)}
+  .d-flex{color:#5a3fd6; background:rgba(124,92,255,.12); border:1px solid rgba(124,92,255,.30)}
+  .d-blue{color:#2563c9; background:rgba(37,99,201,.12); border:1px solid rgba(37,99,201,.30)}
+  .d-red{color:#c0392b; background:rgba(229,72,77,.12); border:1px solid rgba(229,72,77,.30)}
+  .bestside{font-family:var(--mono); font-size:9px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    padding:2px 7px; border-radius:5px; margin-left:4px}
+  .bestside.bs-blue{color:#2563c9; background:rgba(37,99,201,.12); border:1px solid rgba(37,99,201,.30)}
+  .bestside.bs-red{color:#c0392b; background:rgba(229,72,77,.12); border:1px solid rgba(229,72,77,.30)}
+  .bestside.bs-both{color:var(--mute); background:var(--raised); border:1px solid var(--line)}
+
+  /* ---------- bans ---------- */
+  .banbox{border:1px solid color-mix(in srgb,var(--ban) 30%,transparent);
+    background:color-mix(in srgb,var(--ban) 6%,transparent); border-radius:10px; padding:13px 15px}
+  .banbox .bk{font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--ban); margin-bottom:10px; display:flex; align-items:center; gap:8px}
+  .banbox .bk::after{content:""; flex:1; height:1px; background:color-mix(in srgb,var(--ban) 22%,transparent)}
+  .banlist{display:flex; flex-direction:column; gap:9px}
+  .ban-item{display:flex; gap:9px; font-size:13px; line-height:1.5; color:var(--ink2)}
+  .ban-item .champ{color:var(--ban); font-weight:800}
+  .ban-item .bname{color:var(--ink); font-weight:700}
+  .bnum{flex:0 0 18px; height:18px; margin-top:1px; border-radius:5px; background:var(--line); color:var(--mute);
+    font-family:var(--mono); font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center}
+  .ban-abs .bnum{background:var(--ban); color:#fff}
+
+  .hidden{display:none !important}
+  mark{background:color-mix(in srgb,var(--ac,#7c5cff) 22%,transparent); color:var(--ink); border-radius:3px; padding:0 2px; font-weight:700}
+
+  .noresult{display:none; grid-column:1/-1; text-align:center; padding:60px 20px;
+    font-family:var(--mono); font-size:13px; color:var(--mute); letter-spacing:.03em}
+
+  footer{max-width:900px; margin:30px auto 0; padding:20px 22px 0;
+    font-family:var(--mono); font-size:11px; line-height:1.8; color:var(--mute); letter-spacing:.01em;
+    border-top:1px solid var(--line)}
+  footer b{color:var(--ink2)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="row">
+    <div class="brand">
+      <span class="t">Draft Board</span>
+      <span class="s">12 compositions &nbsp;·&nbsp; patch <b>26.11</b> &nbsp;·&nbsp; platine+ &nbsp;·&nbsp; flex</span>
+    </div>
+    <div class="seg" id="filters">
+      <button class="active" data-cat="all">All</button>
+      <button data-cat="early">Early</button>
+      <button data-cat="mid">Mid</button>
+      <button data-cat="scale">Scale</button>
+    </div>
+    <div class="search">
+      <span class="ic">⌕</span>
+      <input id="search" type="text" placeholder="champion…" autocomplete="off" spellcheck="false">
+      <button class="clr" id="clear" title="Effacer">×</button>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <span class="count" id="count"></span>
+  <span class="legend">
+    <span class="lg-early"><i></i>Ultra Early</span>
+    <span class="lg-mid"><i></i>Mid / Late</span>
+    <span class="lg-scale"><i></i>Scale &amp; Safe</span>
+  </span>
+</div>
+
+<div class="grid" id="grid">
+  <div class="noresult" id="noresult">// aucune compo ne contient ce champion</div>
+</div>
+
+<footer>
+  Picks ancrés sur le <b>patch 26.11</b> (méta juin 2026) — hypercarries de retour, supports d'engage en hausse.<br>
+  Timings d'objectifs 2026 : drake ~5:00 · Voidgrubs 6:00 · plates permanentes (or -10/min dès 11:00) · héraut 15:00 · baron 20:00.<br>
+  <b>Bans</b> : n°1 = ban absolu (le contre direct de la win condition) ; n°2/3 = bans de confort.<br>
+  <b>Draft</b> : First pick = à prendre tôt (sûr/flex) · Last pick = à garder pour la fin (contre-pick) · Flex = pickable sur plusieurs rôles pour cacher ton jeu.
+</footer>
+
+<script>
+const ROLES = [["top","Top"],["jungle","Jungle"],["mid","Mid"],["adc","ADC"],["supp","Support"]];
+const CAT_LABEL = {early:"Early", mid:"Mid · Late", scale:"Scale"};
+
+const COMPS = [
+  // ---------- ULTRA EARLY ----------
+  {cat:"early", name:"Dive 6+ — All-in niveau 6", arch:"Dive / Engage early", diff:"Élevée",
+   roles:{top:["Renekton",["Camille","Jax"]], jungle:["Xin Zhao",["Nocturne","Lee Sin"]], mid:["Zed",["Ekko","Akali"]], adc:["Kai'Sa",["Lucian"]], supp:["Nautilus",["Leona","Rell"]]},
+   win:"Dive la bot/mid dès le niveau 6, transformer les kills en objectifs et snowball avant le mid-game.",
+   spike:"6-9 min",
+   combo:"Engage tank (Nautilus Q hook / Leona E-Q) → Xin Zhao saute → Zed + Kai'Sa burst la cible isolée.",
+   draft:{first:["Nautilus","Engage supp blind-safe : il pose la compo et ne se contre pas vraiment."],last:["Zed","Garde l'assassin pour la fin : esquive les contres (Malzahar/Kassadin) et confirme une backline squishy à dive."],flex:"Renekton (top), Xin Zhao (jgl) et Nautilus se pick tôt pour cacher le dive ; Kai'Sa est blind-safe."},
+   side:{best:"Bleu",blue:"Côté idéal : first-pick ton engage (Nautilus/Xin Zhao) pour verrouiller le tempo de dive. Compo proactive, pas besoin de contre-pick.",red:"Utilise le dernier pick pour Zed (esquive Malzahar/Kassadin) et confirmer une lane à dive."},
+   bans:[["Tahm Kench","Son W/R sauve la cible du dive et annule tout le gameplan d'all-in."],["Janna","Son ult de disengage repousse l'engage et sauve la cible avant le burst."],["Kassadin","Scaler imperdable qui survit à ton early et te punit si le snowball échoue."]],
+   plan:[
+     ["0:00 – 5:00","Setup lanes, push pour la <b>prio bot/mid</b>. Pas de dive avant le niveau 6."],
+     ["~5:00","<b>1er drake</b> : prends la prio bot et contest si tu mènes."],
+     ["6:00","<b>Voidgrubs</b> : groupe top+jgl, full clear (épics +15% HP en 2026, ça vaut le coup)."],
+     ["Niv 6 · 6–8 min","<b>Premier dive</b> bot ou mid : engage tank → Xin → burst. C'est ta fenêtre."],
+     ["avant 11:00","<b>Plates max value</b> : convertis tes kills en plates AVANT la décote (-10g/min dès 11:00)."],
+     ["15:00","<b>Héraut</b> : prends-le avec ton avance pour casser une 2e tour."],
+   ]},
+
+  {cat:"early", name:"Pick & Roam — Catch & kill", arch:"Pick", diff:"Moyenne",
+   roles:{top:["Pantheon",["Sett"]], jungle:["Elise",["Nocturne"]], mid:["Twisted Fate",["LeBlanc","Galio"]], adc:["Ashe",["Varus"]], supp:["Pyke",["Bard","Blitzcrank"]]},
+   win:"Vision + roams, chopper une cible isolée puis forcer un objectif en 5v4. TF = set-up/macro globale ; LeBlanc = exécution + snowball solo (elle burst la cible attrapée et fall off en late, identité early parfaite).",
+   spike:"9-14 min",
+   combo:"Ashe R / Blitz hook → Pyke ult (reset sur kill) → collapse 5v4.",
+   draft:{first:["Pantheon","Flex top/mid/supp + ult global, dur à contrer tôt : cache ton intention de roam."],last:["Twisted Fate","Pick le mid en dernier pour esquiver les contres et confirmer un ennemi attrapable (idem LeBlanc)."],flex:"Pantheon (top/mid/supp), Galio (mid/supp), Pyke (supp) brouillent les rôles. Ashe est blind-safe."},
+   side:{best:"Bleu",blue:"Côté idéal : lock Pantheon en P1 (flex global) pour ouvrir sans te dévoiler et sécuriser le tempo de roam.",red:"Garde Twisted Fate / LeBlanc en dernier pour confirmer un mid attrapable."},
+   bans:[["Morgana","Son Black Shield bloque hooks et engages à distance (Ashe R, Pyke/Blitz Q), neutralisant la condition de pick."],["Sivir","Spell Shield bloque le hook + son ult speed permet à l'équipe de fuir tes picks."],["Yuumi","Intargetable, impossible à chopper, et elle peel la cible que tu vises."]],
+   plan:[
+     ["0:00 – 6:00","Lanes safe, <b>vision agressive</b> (Pyke/Bard) dans les rivières, repère les rotations."],
+     ["6:00","<b>Voidgrubs</b> : cherche un pick sur le jgl/supp adverse autour du camp."],
+     ["9:00 – 14:00","<b>Fenêtre de roam</b> (ults TF/Pantheon up) : un pick = drake ou grubs en 5v4."],
+     ["avant 11:00","Pousse pour les <b>plates</b> pendant que la cible attrapée est morte/absente."],
+     ["15:00","<b>Héraut</b> : force un pick au pit, puis prends-le gratis."],
+   ]},
+
+  {cat:"early", name:"Lane Bully — Push & Pressure", arch:"Domination de lane early", diff:"Moyenne",
+   roles:{top:["Aurora",["Renekton"]], jungle:["Nidalee",["Graves"]], mid:["Lucian",["Taliyah"]], adc:["Caitlyn",["Draven"]], supp:["Lux",["Karma"]]},
+   win:"Gagner les 3 lanes au CS et à la pression, prio carte → héraut → tours, fracturer avant l'arrivée des scalers.",
+   spike:"3-12 min",
+   combo:"Poke Caitlyn + Lux pour zoner la lane → héraut vers 14 min → premières tours.",
+   draft:{first:["Aurora","Flex top/mid, forte et dure à contrer : bon blind qui cache si elle va top ou mid."],last:["Lucian","Les bullies dépendent du matchup : garde le mid pour la fin afin de pick dans une lane que tu domines."],flex:"Aurora (top/mid), Taliyah (mid/jgl), Karma (mid/supp). Caitlyn reste solide en blind."},
+   side:{best:"Rouge",blue:"Si bleu : first-pick Aurora (flex top/mid) et joue des bullies sûrs (Caitlyn) plutôt que des matchups risqués.",red:"Côté idéal : last-pick Lucian/Caitlyn dans des lanes que tu domines — chaque contre-pick = une lane gagnée."},
+   bans:[["Vladimir","Quasi imperdable en lane, il scale et punit ta pression early en survivant jusqu'au late."],["Kassadin","Scaler mid imperdable : il traverse ta pression early et te dépasse en late."],["Dr. Mundo","Top imperdable qui ignore ton poke, sustain à travers la lane et scale."]],
+   plan:[
+     ["0:00 – 5:00","<b>Push les 3 lanes</b>, prio absolue, deny le CS et zone l'adversaire."],
+     ["~5:00","<b>1er drake</b> avec la prio bot acquise."],
+     ["6:00","<b>Voidgrubs</b> : ton avance de tempo = full grubs (gros buff de siège en 2026)."],
+     ["8:00 – 11:00","<b>Plates</b> : max l'or des plates AVANT la décote (-10g/min dès 11:00). Le rework tour 2026 récompense le push."],
+     ["15:00","<b>Héraut</b> : transforme ton avance en tours / setup baron."],
+   ]},
+
+  {cat:"early", name:"Invade — Level 1-3 cheese", arch:"Skirmish / Invade early", diff:"Élevée",
+   roles:{top:["Jax",["Camille"]], jungle:["Lee Sin",["Xin Zhao","Nidalee"]], mid:["Galio",["Ahri"]], adc:["Lucian",["Kalista"]], supp:["Rell",["Leona","Nautilus"]]},
+   win:"Contrôler la jungle ennemie, invade niveau 1-3, étouffer/retarder le jungler adverse, ganks répétés tôt.",
+   spike:"2-9 min",
+   combo:"Invade lvl 3 avec lockdown (Rell/Leona) + Lee Sin → tuer le jgl ennemi → ganks en chaîne.",
+   draft:{first:["Rell","Engage supp blind-safe : il assure le lockdown de l'invade sans risque de contre."],last:["Jax","Duelist counterpick : pick-le en dernier pour gagner le 1v1 top (flex top/jgl)."],flex:"Jax (top/jgl), Galio (mid/supp), Lee Sin (jgl) cachent l'invade. Lee peut se pick tôt en P2."},
+   side:{best:"Bleu",blue:"Côté idéal : first-pick ton engage (Rell/Leona) + Lee Sin tôt pour verrouiller le plan d'invade.",red:"Last-pick Jax pour gagner le 1v1 top et sécuriser une side."},
+   bans:[["Briar","Son duel précoce et son auto-sustain retournent les invades et punissent l'agression early."],["Graves","Gagne les duels lvl 1-3 et retourne ton invade en sa faveur."],["Volibear","Puissance lvl 1-3 énorme : il punit l'agression early en jungle comme en lane."]],
+   plan:[
+     ["avant 1:30","<b>Invade lvl 1</b> : contest le camp de départ adverse, wards profondes, contrôle d'entrée."],
+     ["Niv 3 · ~3:00","<b>1re gank/invade</b> avec lockdown : retarde le jgl ennemi d'un camp/niveau."],
+     ["~5:00","<b>1er drake</b> : profite du jgl adverse en retard pour le prendre safe."],
+     ["6:00","<b>Voidgrubs</b> : contrôle de la jungle = grubs quasi gratuits."],
+     ["avant 11:00","Snowball les ganks en <b>plates</b> avant la décote."],
+   ]},
+
+  // ---------- MID / LATE ----------
+  {cat:"mid", name:"Wombo Combo — AoE engage", arch:"Engage / Wombo", diff:"Moyenne",
+   roles:{top:["Malphite",["Ornn"]], jungle:["Wukong",["Sejuani","Amumu"]], mid:["Yasuo",["Viktor","Orianna"]], adc:["Miss Fortune",["Jinx"]], supp:["Rell",["Leona","Nautilus"]]},
+   win:"Group à 5 dès 2 items, enchaîner les CC AoE et effacer les teamfights groupés.",
+   spike:"20-30 min",
+   combo:"Malphite R → Wukong R (knock-ups) → Yasuo R → Miss Fortune R canalisé sur la team clouée.",
+   draft:{first:["Malphite","Flex top, R imparable et dur à contrer : l'enabler du wombo, parfait en blind."],last:["Yasuo","Garde la synergie pour la fin : confirme les knock-ups et esquive les contres de lane."],flex:"Malphite (top/supp), Wukong (top/jgl), Orianna/Viktor (mid). Miss Fortune est blind-safe."},
+   side:{best:"Bleu",blue:"Côté idéal : first-pick Malphite (engage imparable). La compo se construit sur tes pièces, pas sur des contres.",red:"Garde Yasuo pour la fin (synergie knock-ups), mais tu perds l'avantage de sécuriser Malphite en P1."},
+   bans:[["Janna","Son ult de disengage (Monsoon) repousse l'engage et brise tout le wombo."],["Sivir","Spell Shield encaisse l'engage Malphite + son ult disengage toute l'équipe."],["Gragas","Son E-R repositionne/sépare ton regroupement et casse le combo AoE."]],
+   plan:[
+     ["0:00 – 14:00","<b>Survis et farm</b> jusqu'à 2 items, évite les fights non groupés (faible early)."],
+     ["Drakes","Priorise le <b>drake soul</b> — Dragon Vengeance stacke plus fort en 2026."],
+     ["15:00","<b>Héraut</b> : 1er gros teamfight 5v5 groupé, land le combo AoE complet."],
+     ["20:00+","<b>Baron</b> : force le fight avec les ults up, wombo gagnant → baron."],
+   ]},
+
+  {cat:"mid", name:"Burst — Pick assassins", arch:"Pick / Burst", diff:"Élevée",
+   roles:{top:["Camille",["Pantheon"]], jungle:["Nocturne",["Kha'Zix"]], mid:["Zed",["Sylas","Akali"]], adc:["Varus",["Caitlyn"]], supp:["Pyke",["Thresh"]]},
+   win:"Mid-game, lock + oneshot une cible prioritaire avec un combo d'assassins coordonné, jouer en 5v4.",
+   spike:"15-25 min",
+   combo:"Varus R / Camille R lock → Nocturne R → burst Zed + Pyke sur la cible.",
+   draft:{first:["Nocturne","Flex jgl à R global, dur à contrer : moteur des picks, bon premier pick."],last:["Zed","Assassin sensible aux contres : pick-le en dernier (évite Malzahar/Kassadin) et confirme des cibles squishy. Idem Camille."],flex:"Camille (top/jgl/supp), Sylas (mid/top), Pyke (supp/mid). Varus est blind-safe."},
+   side:{best:"Rouge",blue:"Si bleu : ouvre sur Nocturne (jgl dur à contrer) et accepte un Zed plus exposé aux counters.",red:"Côté idéal : last-pick Zed/Camille pour esquiver les contres et confirmer des cibles squishy."},
+   bans:[["Lulu","Wild Growth + polymorph annulent le burst sur la cible protégée et désamorcent les assassins."],["Janna","Peel + disengage : elle protège la cible et repousse les assassins en plein saut."],["Tahm Kench","Avale le carry focus et annule ton oneshot."]],
+   plan:[
+     ["0:00 – 13:00","<b>Snowball les lanes solo</b>, prends les fenêtres de roam, évite les fights 5v5 longs."],
+     ["15:00","<b>Héraut</b> : pick sur une cible isolée → objectif en 5v4."],
+     ["Drakes","Prends-les après un pick, jamais en 5v5 frontal."],
+     ["20:00+","<b>Baron</b> : oneshot le carry adverse <i>avant</i> de claim le baron."],
+   ]},
+
+  {cat:"mid", name:"Front-to-Back — Bruiser teamfight", arch:"Teamfight / Tempo", diff:"Moyenne",
+   roles:{top:["Aatrox",["K'Sante","Sett"]], jungle:["Sejuani",["Vi","Xin Zhao"]], mid:["Orianna",["Vladimir"]], adc:["Jinx",["Aphelios"]], supp:["Nautilus",["Alistar","Leona"]]},
+   win:"Front line solide + DPS sustained, gagner les teamfights mid-game autour des drakes et contrôler le drake soul.",
+   spike:"20-30 min",
+   combo:"Sejuani/Nautilus engage → Orianna Shockwave sur le regroupement → Jinx free DPS reset, Aatrox cleanup.",
+   draft:{first:["Sejuani","Engage jgl/top blind-safe, peel + lockdown : impossible à vraiment contrer."],last:["Aatrox","Bruiser counterpick : garde le top pour la fin pour gagner / ne pas perdre le matchup."],flex:"Sejuani (jgl/top), Orianna (mid), K'Sante/Sett (top). Jinx reste blind-safe."},
+   side:{best:"Bleu",blue:"Côté idéal : first-pick Sejuani (engage flex). Compo de teamfight qui n'a pas besoin de contre.",red:"Last-pick Aatrox pour ne pas perdre le top."},
+   bans:[["Fiddlesticks","Son R (crowstorm + fear) efface une équipe groupée en front-to-back avant que ton DPS s'exprime."],["Vayne","Fond ta frontline en dégâts % HP et kite tout le front-to-back."],["Gangplank","Ses barils zonent ton équipe groupée et punissent le regroupement."]],
+   plan:[
+     ["0:00 – 14:00","Farm et scale, tempo de drakes avec Sejuani/Naut, ne split pas."],
+     ["Drakes","Priorise le <b>soul</b> : ta frontline sécurise le pit, tu gagnes le 5v5."],
+     ["15:00","<b>Héraut</b> : teamfight groupé, Ori Shockwave sur l'engage."],
+     ["20:00+","<b>Baron</b> : front-to-back autour du pit, Jinx free DPS protégée."],
+   ]},
+
+  {cat:"mid", name:"Tempo — Contrôle d'objectifs", arch:"Tempo / Objectifs", diff:"Moyenne",
+   roles:{top:["Jax",["Gnar"]], jungle:["Vi",["Jarvan IV","Sejuani"]], mid:["Taliyah",["Azir"]], adc:["Ezreal",["Kai'Sa"]], supp:["Bard",["Rakan","Thresh"]]},
+   win:"Dominer chaque set-up d'objectif via un pick, prendre tempo et drake soul en jouant les fights en 5v4.",
+   spike:"15-28 min",
+   combo:"Vi R lock le carry au pit de l'objectif → focus → objectif sécurisé en avantage numérique.",
+   draft:{first:["Vi","Jgl lockdown blind-safe : le moteur des picks d'objectif, dur à contrer."],last:["Jax","Counterpick de side lane : pick-le en dernier (flex top/jgl) pour gagner ton 1v1."],flex:"Taliyah (mid/jgl), Jax (top/jgl), Bard (supp). Ezreal est blind-safe."},
+   side:{best:"Indifférent",blue:"Bleu : first-pick Vi (lockdown) pour driver tes picks d'objectif.",red:"Rouge : last-pick Jax en side pour un contre-pick favorable. Compo à l'aise des deux côtés."},
+   bans:[["Nocturne","Son R global + dash ignore ta vision et retourne tes set-ups d'objectifs."],["Gragas","Son E-R flippe les fights de pit et annule l'engage Vi."],["Nidalee","Poke longue portée qui conteste/vole tes objectifs à distance."]],
+   plan:[
+     ["0:00 – 6:00","Prends la <b>prio</b> avant chaque objectif, vision early autour des pits."],
+     ["6:00","<b>Voidgrubs</b> : set-up Vi pour lock un contest et prendre le camp."],
+     ["~5:00 puis drakes","Empile les drakes en jouant chaque pit en 5v4."],
+     ["15:00","<b>Héraut</b> : pick au pit → objectif gratuit."],
+     ["20:00+","<b>Baron</b> : ton tempo doit déjà avoir converti drakes + tours."],
+   ]},
+
+  // ---------- SCALE & SAFE ----------
+  {cat:"scale", name:"Protect the Carry — Hypercarry", arch:"Protect / Hypercarry", diff:"Moyenne",
+   roles:{top:["Ornn",["Shen"]], jungle:["Sejuani",["Maokai"]], mid:["Orianna",["Viktor","Syndra"]], adc:["Jinx",["Kog'Maw","Aphelios"]], supp:["Lulu",["Milio","Janna"]]},
+   win:"Survivre l'early, tout funnel sur l'ADC, atteindre 3-4 items et le protéger pour qu'il 1v9 les teamfights late. Orianna donne la peel + le Shockwave ; Syndra possible comme dégâts secondaires mais on troque la peel contre du burst (il faut alors un jgl/supp qui peel les carries).",
+   spike:"30+ min",
+   combo:"Lulu R + Orianna shield/ball sur Jinx → elle reset son DPS protégée par les 4 autres.",
+   draft:{first:["Ornn","Frontline flex top blind-safe : tanky, upgrades d'items, ne se contre pas."],last:["Jinx","Cache l'hypercarry jusqu'au bout : si l'ennemi sait qu'il vise un carry immobile, il draft une compo de dive. Pick Jinx + Lulu tard."],flex:"Sejuani (jgl/top), Orianna (mid). Évite de révéler le carry trop tôt."},
+   side:{best:"Rouge",blue:"Si bleu : first-pick Ornn (frontline), mais tu devras révéler Jinx avant la fin — gare au draft de dive adverse.",red:"Côté idéal : cache Jinx jusqu'au dernier pick, l'ennemi ne peut plus draft une compo de dive contre ton carry."},
+   bans:[["Kha'Zix","Exploite l'isolement pour oneshot ton hypercarry malgré la peel."],["Nocturne","Fear + dash : il passe la peel et saute directement sur l'hypercarry."],["Rengar","Saut sur la backline pour isoler et oneshot ton carry protégé."]],
+   plan:[
+     ["0:00 – 15:00","<b>Survis et farm l'ADC</b>, refuse les fights risqués, cède les trades douteux."],
+     ["Drakes","Prends-les <b>safe</b> seulement quand l'ADC est en avance d'items."],
+     ["20:00 baron","Ne le force pas sans setup : joue la patience, défends sous tour."],
+     ["25:00+","<b>Teamfights late</b> : peel total sur l'ADC, il 1v9. C'est là que tu gagnes."],
+   ]},
+
+  {cat:"scale", name:"Split Push 1-3-1", arch:"Split / Macro", diff:"Élevée",
+   roles:{top:["Tryndamere",["Camille","Fiora"]], jungle:["Shyvana",["Trundle"]], mid:["Azir",["Cassiopeia"]], adc:["Sivir",["Ezreal"]], supp:["Tahm Kench",["Galio"]]},
+   win:"Étirer la map en 1-3-1, créer des side-lane threats imperdables, forcer des collapses et prendre tours/baron en cross-map.",
+   spike:"25+ min",
+   combo:"Trynda/Camille push une side et menace → l'ennemi collapse → ta team prend l'objectif en 4v3 (Galio/Tahm save à distance).",
+   draft:{first:["Shyvana","Flex jgl blind-safe, farm/push rapide : aucun contre de draft."],last:["Tryndamere","Splitpusher = identité : garde-le pour la fin pour esquiver Jax/Fiora et pick dans un top battable (idem Camille)."],flex:"Camille (top/jgl/supp), Galio (mid/supp), Tahm Kench (supp/top). Sivir est blind-safe."},
+   side:{best:"Rouge",blue:"Si bleu : first-pick Shyvana et accepte un top split plus exposé (Jax/Fiora non bannis).",red:"Côté idéal : last-pick Tryndamere/Camille dans un top battable, esquive les counter-split."},
+   bans:[["Jax","Meilleur counter-split en 1v1, il neutralise ta menace de side lane."],["Fiora","Gagne le 1v1 contre ton splitpusher et retourne la side."],["Shen","Son ult global annule ton kill de split et collapse à distance."]],
+   plan:[
+     ["0:00 – 14:00","Farm les side lanes, Trynda/Camille scale leurs items de duel."],
+     ["Push permanent","Le <b>rework tour 2026</b> (plates permanentes) récompense le split — garde une side poussée en continu."],
+     ["25:00+","<b>1-3-1</b> : ton splitpusher menace une side, ta team tient le 4v4 ailleurs."],
+     ["Baron / drake","Utilise la pression de split (collapse ennemi) pour les prendre gratis à 4."],
+   ]},
+
+  {cat:"scale", name:"Poke / Siège — Artillery", arch:"Poke / Siege", diff:"Moyenne",
+   roles:{top:["Jayce",["Kennen"]], jungle:["Nidalee",["Karthus"]], mid:["Xerath",["Syndra","Ziggs","Vel'Koz"]], adc:["Ezreal",["Varus"]], supp:["Karma",["Lux","Zilean"]]},
+   win:"Poke la team ennemie sous 50% HP avant chaque fight, siéger les tours et gagner la guerre d'attrition sans s'engager. Xerath/Ziggs ont plus de portée pour le siège pur ; Syndra apporte un vrai burst de pick QE+R.",
+   spike:"18-30 min",
+   combo:"Layering du poke Xerath + Jayce + Ezreal → l'ennemi ne peut pas contester drake/tour.",
+   draft:{first:["Jayce","Flex top/mid, cœur du poke : cache son rôle et dur à punir tôt."],last:["Xerath","Artillerie immobile : pick-la en dernier pour éviter les assassins/dive et confirmer un poke safe."],flex:"Jayce (top/mid), Karma (mid/supp), Nidalee (jgl). Ezreal est blind-safe."},
+   side:{best:"Rouge",blue:"Si bleu : first-pick Jayce (flex) et ban fort les engages (Malphite/Nocturne).",red:"Côté idéal : last-pick Xerath pour esquiver les assassins/dive et confirmer un poke safe."},
+   bans:[["Malphite","Un seul R unstoppable ferme la distance et efface une ligne de poke squishy."],["Kassadin","Anti-poke par excellence (bouclier magique + mobilité), il saute ta backline en boucle."],["Hecarim","Engage rapide et longue portée qui ferme la distance sur tes squishies."]],
+   plan:[
+     ["0:00 – 14:00","Poke en lane, évite l'engage, scale tes items de mana/portée."],
+     ["15:00","<b>Héraut</b> : poke l'ennemi hors du pit, puis prends la tour avec l'avance de siège."],
+     ["Objectifs","<b>Poke avant chaque drake/baron</b> : l'ennemi ne peut pas contest sous 50% HP."],
+     ["20:00+","<b>Siège méthodique</b> tour par tour, ne t'engage jamais le premier."],
+   ]},
+
+  {cat:"scale", name:"Scaling Insurance — Safe scalers", arch:"Scaling pur / Safe", diff:"Moyenne",
+   roles:{top:["Kayle",["Nasus"]], jungle:["Master Yi",["Karthus"]], mid:["Kassadin",["Veigar","Vladimir"]], adc:["Kog'Maw",["Vayne"]], supp:["Lulu",["Soraka","Milio"]]},
+   win:"Chaque lane prend un scaler safe imperdable, jouer défensif, surclasser l'adversaire par les stats en late, peu d'all-in early.",
+   spike:"30-40 min",
+   combo:"Lulu R sur Master Yi/Kog'Maw → peel totale → DPS % HP imparable en teamfight tardif.",
+   draft:{first:["Lulu","Supp peel flex blind-safe : enable les scalers sans rien révéler."],last:["Kayle","Hyperscaler fragile en lane : garde-la (et Kassadin) pour la fin pour pick dans des matchups passables, pas des bullies."],flex:"Vladimir (mid/top), Karthus (jgl/mid), Lulu (supp). Cache tes scalers le plus tard possible."},
+   side:{best:"Rouge",blue:"Si bleu : first-pick Lulu et accepte des scalers plus exposés en lane (ban les bullies).",red:"Côté idéal : last-pick Kayle/Kassadin dans des matchups passables, jamais face à un bully."},
+   bans:[["Renekton","Bully top early qui peut fermer la partie avant que ta compo atteigne son spike de scaling."],["Draven","Snowball bot qui peut fermer la bot lane avant ton spike de scaling."],["Lee Sin","Jungler à ganks early qui étouffe la carte avant ton late."]],
+   plan:[
+     ["0:00 – 15:00","<b>Survis ta lane</b>, farm, donne zéro kill gratuit. C'est la phase à risque."],
+     ["Drakes","Concède les early si risqué — tu joues pour le late, pas pour le tempo."],
+     ["25:00 – 30:00","<b>Ton spike</b> : chaque membre surclasse son vis-à-vis. Commence à group."],
+     ["Baron late","Prends-le quand tes scalers sont online, puis ferme la partie."],
+   ]},
+];
+
+const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+const pad = n => String(n).padStart(2,"0");
+const grid = document.getElementById("grid");
+const noresult = document.getElementById("noresult");
+
+COMPS.forEach((c,i) => {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.dataset.cat = c.cat;
+  const champs = [];
+  ROLES.forEach(([k]) => { champs.push(c.roles[k][0], ...c.roles[k][1]); });
+  card.dataset.champs = norm(champs.join(" | "));
+
+  const cells = ROLES.map(([k,label],idx) => {
+    const [main,alts] = c.roles[k];
+    const altTxt = alts.length ? `<span class="alt">alt · ${alts.join(", ")}</span>` : "";
+    const full = idx === 4 ? " full" : "";
+    return `<div class="rcell${full}"><span class="rk">${label}</span><span class="rv"><span class="mn">${main}</span>${altTxt}</span></div>`;
+  }).join("");
+
+  const timeline = c.plan.map(([t,x]) =>
+    `<div class="tl-row"><div class="tl-t">${t}</div><div class="tl-x">${x}</div></div>`).join("");
+
+  const sideCls = {"Bleu":"bs-blue","Rouge":"bs-red","Indifférent":"bs-both"}[c.side.best];
+  const sideBadge = `<span class="bestside ${sideCls}">idéal : ${c.side.best}</span>`;
+  const draftRows =
+    `<div class="d-row"><span class="d-tag d-first">First pick</span><div><b>${c.draft.first[0]}</b> · ${c.draft.first[1]}</div></div>`+
+    `<div class="d-row"><span class="d-tag d-last">Last pick</span><div><b>${c.draft.last[0]}</b> · ${c.draft.last[1]}</div></div>`+
+    `<div class="d-row"><span class="d-tag d-flex">Flex</span><div>${c.draft.flex}</div></div>`+
+    `<div class="d-row"><span class="d-tag d-blue">Côté bleu</span><div>${c.side.blue}</div></div>`+
+    `<div class="d-row"><span class="d-tag d-red">Côté rouge</span><div>${c.side.red}</div></div>`;
+
+  const banItems = c.bans.map((b,bi) =>
+    `<div class="ban-item${bi===0?" ban-abs":""}"><span class="bnum">${bi+1}</span><div>${bi===0?`<span class="champ">${b[0]}</span>`:`<span class="bname">${b[0]}</span>`} · ${b[1]}</div></div>`).join("");
+
+  card.innerHTML = `
+    <div class="head" onclick="this.closest('.card').classList.toggle('open')">
+      <div class="toprow">
+        <div class="titlewrap">
+          <div class="kicker"><span class="kcat">${CAT_LABEL[c.cat]}</span><span class="knum">/ ${pad(i+1)}</span></div>
+          <div class="name">${c.name}</div>
+          <div class="arch">${c.arch}</div>
+        </div>
+        <span class="diff" data-d="${c.diff}"><i></i>${c.diff}</span>
+      </div>
+      <div class="roles">${cells}</div>
+      <div class="midrow">
+        <span class="kv ban"><span class="k">Ban</span><span class="v">${c.bans[0][0]}</span><span class="bmore">+${c.bans.length-1}</span></span>
+        <span class="kv spike"><span class="k">Spike</span><span class="v">${c.spike}</span></span>
+        <button class="expand" type="button" onclick="event.stopPropagation();this.closest('.card').classList.toggle('open')">
+          <span class="lbl-more">Détails</span><span class="lbl-less">Replier</span><span class="chev">▾</span>
+        </button>
+      </div>
+    </div>
+    <div class="details"><div class="inner"><div class="dpad">
+      <div class="block win"><div class="bk">Win condition</div><p>${c.win}</p></div>
+      <div class="block draft"><div class="bk">Draft — ordre de pick ${sideBadge}</div><div class="dlist">${draftRows}</div></div>
+      <div class="block plan"><div class="bk">Plan de jeu — timings</div><div class="tl">${timeline}</div></div>
+      <div class="block combo"><div class="bk">Combo clé</div><p>${c.combo}</p></div>
+      <div class="banbox"><div class="bk">Bans prioritaires</div><div class="banlist">${banItems}</div></div>
+    </div></div></div>`;
+  grid.appendChild(card);
+});
+
+const cards = Array.from(document.querySelectorAll(".card"));
+const countEl = document.getElementById("count");
+let activeCat = "all", query = "";
+
+function highlight(text, q){
+  const n = norm(text); let out=""; let i=0;
+  while(i < text.length){
+    if(q && n.startsWith(q,i)){ out += "<mark>"+text.slice(i,i+q.length)+"</mark>"; i += q.length; }
+    else { out += text[i]; i++; }
+  }
+  return out;
+}
+
+function apply(){
+  const q = norm(query.trim());
+  let shown = 0;
+  cards.forEach(card => {
+    const catOk = activeCat==="all" || card.dataset.cat===activeCat;
+    const searchOk = !q || card.dataset.champs.includes(q);
+    const vis = catOk && searchOk;
+    card.classList.toggle("hidden", !vis);
+    if(vis) shown++;
+    card.querySelectorAll(".mn, .alt").forEach(el => {
+      if(el.dataset.raw === undefined) el.dataset.raw = el.textContent;
+      el.innerHTML = q ? highlight(el.dataset.raw, q) : el.dataset.raw;
+    });
+  });
+  noresult.style.display = shown===0 ? "block" : "none";
+  countEl.textContent = "// " + shown + " composition" + (shown>1?"s":"");
+}
+
+document.getElementById("filters").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  document.querySelectorAll("#filters button").forEach(x => x.classList.remove("active"));
+  b.classList.add("active"); activeCat = b.dataset.cat; apply();
+});
+const si = document.getElementById("search");
+si.addEventListener("input", e => { query = e.target.value; apply(); });
+document.getElementById("clear").addEventListener("click", () => { si.value=""; query=""; apply(); si.focus(); });
+
+apply();
+</script>
+</body>
+</html>

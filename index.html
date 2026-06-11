@@ -197,6 +197,11 @@
   .bestside.bs-blue{color:#2563c9; background:rgba(37,99,201,.12); border:1px solid rgba(37,99,201,.30)}
   .bestside.bs-red{color:#c0392b; background:rgba(229,72,77,.12); border:1px solid rgba(229,72,77,.30)}
   .bestside.bs-both{color:var(--mute); background:var(--raised); border:1px solid var(--line)}
+  .pathimp{font-family:var(--mono); font-size:9px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 7px; border-radius:5px; margin-left:4px}
+  .pi-crit{color:#c0392b; background:rgba(229,72,77,.12); border:1px solid rgba(229,72,77,.30)}
+  .pi-warn{color:#9a6406; background:rgba(181,118,10,.12); border:1px solid rgba(181,118,10,.30)}
+  .pi-info{color:#5a3fd6; background:rgba(124,92,255,.12); border:1px solid rgba(124,92,255,.30)}
+  .pi-low{color:var(--mute); background:var(--raised); border:1px solid var(--line)}
 
   /* ---------- bans ---------- */
   .banbox{border:1px solid color-mix(in srgb,var(--ban) 30%,transparent);
@@ -309,6 +314,7 @@
 <script>
 const ROLES = [["top","Top"],["jungle","Jungle"],["mid","Mid"],["adc","ADC"],["supp","Support"]];
 const CAT_LABEL = {early:"Early", mid:"Mid · Late", scale:"Scale"};
+const PATH_IMP = {"Crucial":"crit","Important":"warn","Modérée":"info","Faible":"low"};
 
 const COMPS = [
   // ---------- ULTRA EARLY ----------
@@ -317,6 +323,7 @@ const COMPS = [
    win:"Dive la bot/mid dès le niveau 6, transformer les kills en objectifs et snowball avant le mid-game.",
    spike:"6-9 min",
    combo:"Engage tank (Nautilus Q hook / Leona E-Q) → Xin Zhao saute → Zed + Lucian burst la cible isolée.",
+   path:{imp:"Crucial",text:"Start côté bot (près de Nautilus). Full clear pour hit le niveau 6 vite → premier dive bot à ~6:00 ; gank lvl 3 possible si la lane set up. Scuttle bot prioritaire."},
    draft:{first:["Nautilus","Engage supp blind-safe : il pose la compo et ne se contre pas vraiment."],last:["Zed","Garde l'assassin pour la fin : esquive les contres (Malzahar/Kassadin) et confirme une backline squishy à dive."],flex:"Renekton (top), Xin Zhao (jgl) et Nautilus se pick tôt pour cacher le dive ; Lucian est blind-safe."},
    side:{best:"Bleu",blue:"Côté idéal : first-pick ton engage (Nautilus/Xin Zhao) pour verrouiller le tempo de dive. Compo proactive, pas besoin de contre-pick.",red:"Utilise le dernier pick pour Zed (esquive Malzahar/Kassadin) et confirmer une lane à dive."},
    bans:[["Tahm Kench","Son W/R sauve la cible du dive et annule tout le gameplan d'all-in."],["Caitlyn","Lane bot S+ qui prend le tempo et punit à distance un dive raté."],["Maokai","Root + sustain anti-dive : il neutralise l'engage et protège la cible visée."]],
@@ -334,6 +341,7 @@ const COMPS = [
    win:"Vision + roams, chopper une cible isolée puis forcer un objectif en 5v4. TF = set-up/macro globale ; LeBlanc = exécution + snowball solo (elle burst la cible attrapée et fall off en late, identité early parfaite).",
    spike:"9-14 min",
    combo:"Ashe R / Blitz hook → Pyke ult (reset sur kill) → collapse 5v4.",
+   path:{imp:"Important",text:"Elise = gank niveau 3 : 3 camps puis gank la lane la plus kill-able (souvent bot avec Pyke). Cherche le 1er pick tôt, garde la vision rivière pour les rotations."},
    draft:{first:["Pantheon","Flex top/mid/supp + ult global, dur à contrer tôt : cache ton intention de roam."],last:["Twisted Fate","Pick le mid en dernier pour esquiver les contres et confirmer un ennemi attrapable (idem LeBlanc)."],flex:"Pantheon (top/mid/supp), Galio (mid/supp), Pyke (supp) brouillent les rôles. Ashe est blind-safe."},
    side:{best:"Bleu",blue:"Côté idéal : lock Pantheon en P1 (flex global) pour ouvrir sans te dévoiler et sécuriser le tempo de roam.",red:"Garde Twisted Fate / LeBlanc en dernier pour confirmer un mid attrapable."},
    bans:[["Morgana","Son Black Shield bloque hooks et engages à distance (Ashe R, Pyke/Blitz Q), neutralisant la condition de pick."],["Maokai","Zone-control + sustain anti-roam : il encaisse vos catchs et désamorce les pick."],["Thresh","Hook + lantern : il punit vos roamers isolés et sauve la cible que tu chopes."]],
@@ -350,6 +358,7 @@ const COMPS = [
    win:"Gagner les 3 lanes au CS et à la pression, prio carte → héraut → tours, fracturer avant l'arrivée des scalers.",
    spike:"3-12 min",
    combo:"Caitlyn + Leona verrouillent la bot et LeBlanc claque le mid → prio carte + héraut vers 14 min → premières tours.",
+   path:{imp:"Modérée",text:"Nidalee clear très vite : full clear → contest les 2 scuttles → grubs à 6:00 avec ta prio de lanes. Counter-jungle si le jgl adverse passe bas."},
    draft:{first:["Aurora","Flex top/mid, forte et dure à contrer : bon blind qui cache si elle va top ou mid."],last:["Caitlyn","Les bullies dépendent du matchup : garde la bot pour la fin afin de pick dans une lane que tu domines."],flex:"Aurora (top/mid), Taliyah (mid/jgl), Karma (mid/supp). Caitlyn reste solide en blind."},
    side:{best:"Rouge",blue:"Si bleu : first-pick Aurora (flex top/mid) et joue des bullies sûrs (Caitlyn) plutôt que des matchups risqués.",red:"Côté idéal : last-pick Caitlyn dans une lane que tu domines — chaque contre-pick = une lane gagnée."},
    bans:[["Vladimir","Quasi imperdable en lane, il scale et punit ta pression early en survivant jusqu'au late."],["Kayle","Hyperscaler imperdable qui survit à ta pression et te surclasse totalement en late."],["Dr. Mundo","Top imperdable qui ignore ton poke, sustain à travers la lane et scale."]],
@@ -366,6 +375,7 @@ const COMPS = [
    win:"Contrôler la jungle ennemie, invade niveau 1-3, étouffer/retarder le jungler adverse, ganks répétés tôt.",
    spike:"2-9 min",
    combo:"Invade lvl 3 avec lockdown (Rell/Leona) + Lee Sin → tuer le jgl ennemi → ganks en chaîne.",
+   path:{imp:"Crucial",text:"C'est le cœur de la compo. Lvl 1 : invade le camp de départ adverse avec la team (Rell/Leona) ; sinon start normal → gank lvl 3 avec Lee Sin. Étouffe le jgl ennemi, vole ses camps."},
    draft:{first:["Rell","Engage supp blind-safe : il assure le lockdown de l'invade sans risque de contre."],last:["Jax","Duelist counterpick : pick-le en dernier pour gagner le 1v1 top (flex top/jgl)."],flex:"Jax (top/jgl), Galio (mid/supp), Lee Sin (jgl) cachent l'invade. Lee peut se pick tôt en P2."},
    side:{best:"Bleu",blue:"Côté idéal : first-pick ton engage (Rell/Leona) + Lee Sin tôt pour verrouiller le plan d'invade.",red:"Last-pick Jax pour gagner le 1v1 top et sécuriser une side."},
    bans:[["Briar","Son duel précoce et son auto-sustain retournent les invades et punissent l'agression early."],["Graves","Gagne les duels lvl 1-3 et retourne ton invade en sa faveur."],["Nocturne","Jgl S+ qui ignore tes wards et retourne une jungle agressive contre toi."]],
@@ -383,6 +393,7 @@ const COMPS = [
    win:"Group à 5 dès 2 items, enchaîner les CC AoE et effacer les teamfights groupés.",
    spike:"20-30 min",
    combo:"Malphite R → Wukong R (knock-ups) → Yasuo R → Miss Fortune R canalisé sur la team clouée.",
+   path:{imp:"Faible",text:"Peu déterminante. Full clear safe → scuttle → grubs/1er drake à 6:00 pour le tempo. Wukong farme jusqu'au pic de teamfight, pas de gank forcé early."},
    draft:{first:["Malphite","Flex top, R imparable et dur à contrer : l'enabler du wombo, parfait en blind."],last:["Yasuo","Garde la synergie pour la fin : confirme les knock-ups et esquive les contres de lane."],flex:"Malphite (top/supp), Wukong (top/jgl), Orianna/Viktor (mid). Miss Fortune est blind-safe."},
    side:{best:"Bleu",blue:"Côté idéal : first-pick Malphite (engage imparable). La compo se construit sur tes pièces, pas sur des contres.",red:"Garde Yasuo pour la fin (synergie knock-ups), mais tu perds l'avantage de sécuriser Malphite en P1."},
    bans:[["Janna","Son ult de disengage (Monsoon) repousse l'engage et brise tout le wombo."],["Sivir","Spell Shield encaisse l'engage Malphite + son ult disengage toute l'équipe."],["Lulu","Polymorph + Wild Growth annulent l'engage Malphite et protègent la cible du combo."]],
@@ -398,6 +409,7 @@ const COMPS = [
    win:"Mid-game, lock + oneshot une cible prioritaire avec un combo d'assassins coordonné, jouer en 5v4.",
    spike:"15-25 min",
    combo:"Varus R / Camille R lock → Nocturne R → burst Zed + Pyke sur la cible.",
+   path:{imp:"Important",text:"Décisive autour du niveau 6 : full clear pour hit 6 vite → premier gank R (Paranoïa) sur une lane poussée. Avant 6, farm + scuttle, évite les ganks à mains nues."},
    draft:{first:["Nocturne","Flex jgl à R global, dur à contrer : moteur des picks, bon premier pick."],last:["Zed","Assassin sensible aux contres : pick-le en dernier (évite Malzahar/Kassadin) et confirme des cibles squishy. Idem Camille."],flex:"Camille (top/jgl/supp), Sylas (mid/top), Pyke (supp/mid). Varus est blind-safe."},
    side:{best:"Rouge",blue:"Si bleu : ouvre sur Nocturne (jgl dur à contrer) et accepte un Zed plus exposé aux counters.",red:"Côté idéal : last-pick Zed/Camille pour esquiver les contres et confirmer des cibles squishy."},
    bans:[["Lulu","Wild Growth + polymorph annulent le burst sur la cible protégée et désamorcent les assassins."],["Janna","Peel + disengage : elle protège la cible et repousse les assassins en plein saut."],["Tahm Kench","Avale le carry focus et annule ton oneshot."]],
@@ -413,6 +425,7 @@ const COMPS = [
    win:"Front line solide + DPS sustained, gagner les teamfights mid-game autour des drakes et contrôler le drake soul.",
    spike:"20-30 min",
    combo:"Sejuani/Nautilus engage → Orianna Shockwave sur le regroupement → Jinx free DPS reset, Aatrox cleanup.",
+   path:{imp:"Modérée",text:"Tempo objectifs : full clear → contest scuttle → set up grubs 6:00 et 1er drake. Sejuani farme et engage les objectifs ; gank si la lane a du CC à enchaîner."},
    draft:{first:["Sejuani","Engage jgl/top blind-safe, peel + lockdown : impossible à vraiment contrer."],last:["Aatrox","Bruiser counterpick : garde le top pour la fin pour gagner / ne pas perdre le matchup."],flex:"Sejuani (jgl/top), Orianna (mid), K'Sante/Sett (top). Jinx reste blind-safe."},
    side:{best:"Bleu",blue:"Côté idéal : first-pick Sejuani (engage flex). Compo de teamfight qui n'a pas besoin de contre.",red:"Last-pick Aatrox pour ne pas perdre le top."},
    bans:[["Fiddlesticks","Son R (crowstorm + fear) efface une équipe groupée en front-to-back avant que ton DPS s'exprime."],["Vayne","Fond ta frontline en dégâts % HP et kite tout le front-to-back."],["Gangplank","Ses barils zonent ton équipe groupée et punissent le regroupement."]],
@@ -428,6 +441,7 @@ const COMPS = [
    win:"Dominer chaque set-up d'objectif via un pick, prendre tempo et drake soul en jouant les fights en 5v4.",
    spike:"15-28 min",
    combo:"Vi R lock le carry au pit de l'objectif → focus → objectif sécurisé en avantage numérique.",
+   path:{imp:"Crucial",text:"La compo tourne autour de Vi. Path vers le 1er objectif : clear le côté du 1er drake/grubs, gank niv 6 (R lock) puis convertis en objectif. Pose la vision avant chaque pit."},
    draft:{first:["Vi","Jgl lockdown blind-safe : le moteur des picks d'objectif, dur à contrer."],last:["Jax","Counterpick de side lane : pick-le en dernier (flex top/jgl) pour gagner ton 1v1."],flex:"Taliyah (mid/jgl), Jax (top/jgl), Bard (supp). Ezreal est blind-safe."},
    side:{best:"Indifférent",blue:"Bleu : first-pick Vi (lockdown) pour driver tes picks d'objectif.",red:"Rouge : last-pick Jax en side pour un contre-pick favorable. Compo à l'aise des deux côtés."},
    bans:[["Nocturne","Son R global + dash ignore ta vision et retourne tes set-ups d'objectifs."],["Gragas","Son E-R flippe les fights de pit et annule l'engage Vi."],["Briar","S+ early agressif qui conteste directement ton tempo et tes set-ups de drake."]],
@@ -445,6 +459,7 @@ const COMPS = [
    win:"Survivre l'early, tout funnel sur l'ADC, atteindre 3-4 items et le protéger pour qu'il 1v9 les teamfights late. Orianna donne la peel + le Shockwave ; Syndra possible comme dégâts secondaires mais on troque la peel contre du burst (il faut alors un jgl/supp qui peel les carries).",
    spike:"30+ min",
    combo:"Milio R (cleanse) + Orianna shield/ball sur Jinx → elle reset son DPS protégée par les 4 autres.",
+   path:{imp:"Faible",text:"Full clear safe, scuttle, aucun gank risqué : Sejuani farme et garde ses CC pour peeler Jinx en teamfight. Tempo drake seulement quand l'ADC est en avance d'items."},
    draft:{first:["Ornn","Frontline flex top blind-safe : tanky, upgrades d'items, ne se contre pas."],last:["Jinx","Cache l'hypercarry jusqu'au bout : si l'ennemi sait qu'il vise un carry immobile, il draft une compo de dive. Pick Jinx + Lulu tard."],flex:"Sejuani (jgl/top), Orianna (mid). Évite de révéler le carry trop tôt."},
    side:{best:"Rouge",blue:"Si bleu : first-pick Ornn (frontline), mais tu devras révéler Jinx avant la fin — gare au draft de dive adverse.",red:"Côté idéal : cache Jinx jusqu'au dernier pick, l'ennemi ne peut plus draft une compo de dive contre ton carry."},
    bans:[["Kha'Zix","Exploite l'isolement pour oneshot ton hypercarry malgré la peel."],["Nocturne","Fear + dash : il passe la peel et saute directement sur l'hypercarry."],["Malphite","Son R engage la backline groupée et oneshot ton hypercarry à travers la peel."]],
@@ -460,6 +475,7 @@ const COMPS = [
    win:"Étirer la map en 1-3-1, créer des side-lane threats imperdables, forcer des collapses et prendre tours/baron en cross-map.",
    spike:"25+ min",
    combo:"Trynda/Camille push une side et menace → l'ennemi collapse → ta team prend l'objectif en 4v3 (Galio/Tahm save à distance).",
+   path:{imp:"Faible",text:"Shyvana = power farm : full clear le plus rapide, empile camps + drakes, évite les fights. Tu scales pour alimenter le 1-3-1, pas pour ganker."},
    draft:{first:["Shyvana","Flex jgl blind-safe, farm/push rapide : aucun contre de draft."],last:["Tryndamere","Splitpusher = identité : garde-le pour la fin pour esquiver Jax/Fiora et pick dans un top battable (idem Camille)."],flex:"Camille (top/jgl/supp), Galio (mid/supp), Tahm Kench (supp/top). Ezreal est blind-safe."},
    side:{best:"Rouge",blue:"Si bleu : first-pick Shyvana et accepte un top split plus exposé (Jax/Fiora non bannis).",red:"Côté idéal : last-pick Tryndamere/Camille dans un top battable, esquive les counter-split."},
    bans:[["Jax","Meilleur counter-split en 1v1, il neutralise ta menace de side lane."],["Fiora","Gagne le 1v1 contre ton splitpusher et retourne la side."],["Shen","Son ult global annule ton kill de split et collapse à distance."]],
@@ -475,6 +491,7 @@ const COMPS = [
    win:"Poke la team ennemie sous 50% HP avant chaque fight, siéger les tours et gagner la guerre d'attrition sans s'engager. Xerath/Ziggs ont plus de portée pour le siège pur ; Syndra apporte un vrai burst de pick QE+R.",
    spike:"18-30 min",
    combo:"Layering du poke Xerath + Jayce + Ezreal → l'ennemi ne peut pas contester drake/tour.",
+   path:{imp:"Faible",text:"Karthus = clear ultra-rapide + farm : full clear, scuttle, et garde ton R global pour sécuriser un objectif ou finir une cible poke à distance. Pas de gank physique."},
    draft:{first:["Jayce","Flex top/mid, cœur du poke : cache son rôle et dur à punir tôt."],last:["Xerath","Artillerie immobile : pick-la en dernier pour éviter les assassins/dive et confirmer un poke safe."],flex:"Jayce (top/mid), Karma (mid/supp), Karthus (jgl). Ezreal est blind-safe."},
    side:{best:"Rouge",blue:"Si bleu : first-pick Jayce (flex) et ban fort les engages (Malphite/Nocturne).",red:"Côté idéal : last-pick Xerath pour esquiver les assassins/dive et confirmer un poke safe."},
    bans:[["Malphite","Un seul R unstoppable ferme la distance et efface une ligne de poke squishy."],["Nocturne","R global + flank : il ferme la distance et casse ton siège immobile."],["Hecarim","Engage rapide et longue portée qui ferme la distance sur tes squishies."]],
@@ -490,6 +507,7 @@ const COMPS = [
    win:"Chaque lane prend un scaler safe imperdable, avec un jungle tank-CC (Sejuani) pour les protéger ; jouer défensif et surclasser l'adversaire par les stats en late.",
    spike:"30-40 min",
    combo:"Sejuani engage/peel + Milio R (cleanse) sur Kog'Maw → DPS % HP imparable en teamfight tardif.",
+   path:{imp:"Faible",text:"Full clear safe, scuttle, tempo drake. Sejuani protège les scalers (Kog/Kayle/Vlad) : elle farme et garde son engage/CC pour le late, pas d'agression early."},
    draft:{first:["Milio","Supp peel/cleanse flex blind-safe : enable les scalers sans rien révéler."],last:["Kayle","Hyperscaler fragile en lane : garde-la (et Vladimir) pour la fin pour pick dans des matchups passables, pas des bullies."],flex:"Vladimir (mid/top), Karthus (jgl/mid), Milio (supp). Cache tes scalers le plus tard possible."},
    side:{best:"Rouge",blue:"Si bleu : first-pick Sejuani/Milio (front-CC + peel) et accepte des scalers plus exposés en lane (ban les bullies).",red:"Côté idéal : last-pick Kayle/Vladimir dans des matchups passables, jamais face à un bully."},
    bans:[["Renekton","Bully top early qui peut fermer la partie avant que ta compo atteigne son spike de scaling."],["Draven","Snowball bot qui peut fermer la bot lane avant ton spike de scaling."],["Lee Sin","Jungler à ganks early qui étouffe la carte avant ton late."]],
@@ -542,6 +560,7 @@ COMPS.forEach((c,i) => {
     <div class="block win"><div class="bk">Win condition</div><p>${c.win}</p></div>
     <div class="block draft"><div class="bk">Draft — ordre de pick ${sideBadge}</div><div class="dlist">${draftRows}</div></div>
     <div class="block plan"><div class="bk">Plan de jeu — timings</div><div class="tl">${timeline}</div></div>
+    <div class="block path"><div class="bk">Pathing jungle — 1er clear <span class="pathimp pi-${PATH_IMP[c.path.imp]||'low'}">${c.path.imp}</span></div><p>${c.path.text}</p></div>
     <div class="block combo"><div class="bk">Combo clé</div><p>${c.combo}</p></div>
     <div class="banbox"><div class="bk">Bans prioritaires</div><div class="banlist">${banItems}</div></div>`;
 

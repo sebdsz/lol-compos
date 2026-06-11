@@ -134,11 +134,16 @@
 
   .roles{margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:1px;
     background:var(--line); border:1px solid var(--line); border-radius:9px; overflow:hidden}
-  .rcell{background:var(--surface); padding:9px 12px; display:flex; flex-direction:column; gap:2px}
+  .rcell{background:var(--surface); padding:9px 12px; display:flex; flex-direction:column; gap:5px}
   .rcell.full{grid-column:1/-1; background:var(--surface2)}
   .rcell .rk{font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--mute2)}
+  .rcell .rv{display:flex; align-items:center; gap:9px; min-width:0}
+  .rtxt{display:flex; flex-direction:column; min-width:0}
   .rcell .rv .mn{font-size:14px; font-weight:600; color:var(--ink)}
   .rcell .rv .alt{display:none}
+  /* champion portraits (Data Dragon CDN) */
+  .cimg{width:28px; height:28px; border-radius:6px; flex-shrink:0; object-fit:cover; display:block;
+    background:var(--raised); box-shadow:inset 0 0 0 1px var(--line2)}
 
   .midrow{margin-top:14px; padding-top:14px; border-top:1px solid var(--line);
     display:flex; align-items:center; gap:16px; flex-wrap:wrap}
@@ -167,6 +172,9 @@
     color:var(--mute2); margin-bottom:6px; display:flex; align-items:center; gap:8px}
   .block .bk::after{content:""; flex:1; height:1px; background:var(--line)}
   .block p{margin:0; font-size:14px; line-height:1.55; color:var(--ink2)}
+  .block.weak .bk{color:var(--amber)}
+  .block.weak .bk::after{background:color-mix(in srgb,var(--amber) 28%,transparent)}
+  .block.weak b{color:var(--ink); font-weight:700}
 
   /* ---------- timeline (plan de jeu) ---------- */
   .tl{margin-top:10px}
@@ -210,7 +218,9 @@
     color:var(--ban); margin-bottom:10px; display:flex; align-items:center; gap:8px}
   .banbox .bk::after{content:""; flex:1; height:1px; background:color-mix(in srgb,var(--ban) 22%,transparent)}
   .banlist{display:flex; flex-direction:column; gap:9px}
-  .ban-item{display:flex; gap:9px; font-size:13px; line-height:1.5; color:var(--ink2)}
+  .ban-item{display:flex; gap:9px; align-items:flex-start; font-size:13px; line-height:1.5; color:var(--ink2)}
+  .ban-item .cimg{width:22px; height:22px; border-radius:5px; margin-top:1px;
+    filter:grayscale(.45); box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ban) 35%,transparent)}
   .ban-item .champ{color:var(--ban); font-weight:800}
   .ban-item .bname{color:var(--ink); font-weight:700}
   .bnum{flex:0 0 18px; height:18px; margin-top:1px; border-radius:5px; background:var(--line); color:var(--mute);
@@ -260,7 +270,7 @@
   <div class="row">
     <div class="brand">
       <span class="t">Draft Board</span>
-      <span class="s">12 compositions &nbsp;·&nbsp; patch <b>26.11</b> &nbsp;·&nbsp; platine+ &nbsp;·&nbsp; flex</span>
+      <span class="s">12 compositions &nbsp;·&nbsp; patch <b>26.11</b> &nbsp;·&nbsp; platine+ &nbsp;·&nbsp; flex &nbsp;·&nbsp; <span title="Méta revérifiée à cette date — re-check à chaque gros patch">màj 11/06</span></span>
     </div>
     <div class="seg" id="filters">
       <button class="active" data-cat="all">All</button>
@@ -308,7 +318,8 @@
   Picks ancrés sur le <b>patch 26.11</b> (méta juin 2026) — hypercarries de retour, supports d'engage en hausse.<br>
   Timings d'objectifs 2026 : drake ~5:00 · Voidgrubs 6:00 · plates permanentes (or -10/min dès 11:00) · héraut 15:00 · baron 20:00.<br>
   <b>Bans</b> : n°1 = ban absolu (le contre direct de la win condition) ; n°2/3 = bans de confort.<br>
-  <b>Draft</b> : First pick = à prendre tôt (sûr/flex) · Last pick = à garder pour la fin (contre-pick) · Flex = pickable sur plusieurs rôles pour cacher ton jeu.
+  <b>Draft</b> : First pick = à prendre tôt (sûr/flex) · Last pick = à garder pour la fin (contre-pick) · Flex = pickable sur plusieurs rôles pour cacher ton jeu.<br>
+  <b>Données</b> vérifiées le <b>11 juin 2026</b> (méta 26.11), validées par panel d'analystes — à re-checker à chaque gros patch. Portraits : Riot Data Dragon 16.12.1.
 </footer>
 
 <script>
@@ -316,9 +327,18 @@ const ROLES = [["top","Top"],["jungle","Jungle"],["mid","Mid"],["adc","ADC"],["s
 const CAT_LABEL = {early:"Early", mid:"Mid · Late", scale:"Scale"};
 const PATH_IMP = {"Crucial":"crit","Important":"warn","Modérée":"info","Faible":"low"};
 
+// Portraits champions via Riot Data Dragon (CDN). Map nom affiché -> id d'image (ids irréguliers : Wukong=MonkeyKing, Dr. Mundo=DrMundo…).
+const DDV = "16.12.1";
+const CHAMP_ID = {"Aatrox":"Aatrox","Ahri":"Ahri","Akali":"Akali","Alistar":"Alistar","Amumu":"Amumu","Aphelios":"Aphelios","Ashe":"Ashe","Aurora":"Aurora","Azir":"Azir","Bard":"Bard","Blitzcrank":"Blitzcrank","Briar":"Briar","Caitlyn":"Caitlyn","Camille":"Camille","Cassiopeia":"Cassiopeia","Draven":"Draven","Dr. Mundo":"DrMundo","Ekko":"Ekko","Elise":"Elise","Ezreal":"Ezreal","Fiddlesticks":"Fiddlesticks","Fiora":"Fiora","Galio":"Galio","Gangplank":"Gangplank","Gnar":"Gnar","Gragas":"Gragas","Graves":"Graves","Hecarim":"Hecarim","Janna":"Janna","Jarvan IV":"JarvanIV","Jax":"Jax","Jayce":"Jayce","Jinx":"Jinx","Kai'Sa":"Kaisa","Kalista":"Kalista","Karma":"Karma","Karthus":"Karthus","Kassadin":"Kassadin","Kayle":"Kayle","Kennen":"Kennen","Kha'Zix":"Khazix","Kog'Maw":"KogMaw","K'Sante":"KSante","LeBlanc":"Leblanc","Lee Sin":"LeeSin","Leona":"Leona","Lucian":"Lucian","Lulu":"Lulu","Lux":"Lux","Malphite":"Malphite","Malzahar":"Malzahar","Maokai":"Maokai","Master Yi":"MasterYi","Milio":"Milio","Miss Fortune":"MissFortune","Wukong":"MonkeyKing","Morgana":"Morgana","Nasus":"Nasus","Nautilus":"Nautilus","Nidalee":"Nidalee","Nocturne":"Nocturne","Orianna":"Orianna","Ornn":"Ornn","Pantheon":"Pantheon","Pyke":"Pyke","Rakan":"Rakan","Rell":"Rell","Renekton":"Renekton","Sejuani":"Sejuani","Sett":"Sett","Shen":"Shen","Shyvana":"Shyvana","Sivir":"Sivir","Soraka":"Soraka","Sylas":"Sylas","Syndra":"Syndra","Tahm Kench":"TahmKench","Taliyah":"Taliyah","Thresh":"Thresh","Trundle":"Trundle","Tryndamere":"Tryndamere","Twisted Fate":"TwistedFate","Varus":"Varus","Vayne":"Vayne","Veigar":"Veigar","Vel'Koz":"Velkoz","Vi":"Vi","Viktor":"Viktor","Vladimir":"Vladimir","Xerath":"Xerath","Xin Zhao":"XinZhao","Yasuo":"Yasuo","Zed":"Zed","Ziggs":"Ziggs","Zilean":"Zilean"};
+const champImg = (name, cls="cimg") => {
+  const id = CHAMP_ID[name];
+  return id ? `<img class="${cls}" src="https://ddragon.leagueoflegends.com/cdn/${DDV}/img/champion/${id}.png" alt="" loading="lazy" onerror="this.remove()">` : "";
+};
+
 const COMPS = [
   // ---------- ULTRA EARLY ----------
   {cat:"early", name:"Dive 6+ — All-in niveau 6", arch:"Dive / Engage early", diff:"Élevée",
+   weak:"Le <b>disengage</b> (Janna, Tahm Kench) et les scalers qui survivent au dive : si l'all-in 6-9 min échoue, tu n'as quasi pas de plan B en late.",
    roles:{top:["Renekton",["Camille","Jax"]], jungle:["Xin Zhao",["Nocturne","Lee Sin"]], mid:["Zed",["Ekko","Akali"]], adc:["Lucian",["Kai'Sa"]], supp:["Nautilus",["Leona","Rell"]]},
    win:"Dive la bot/mid dès le niveau 6, transformer les kills en objectifs et snowball avant le mid-game.",
    spike:"6-9 min",
@@ -337,6 +357,7 @@ const COMPS = [
    ]},
 
   {cat:"early", name:"Pick & Roam — Catch & kill", arch:"Pick", diff:"Moyenne",
+   weak:"Les équipes <b>groupées et anti-catch</b> (vision propre, peu de cibles isolées) : sans pick, ton teamfight 5v5 brut est faible et tu fall off après 25 min.",
    roles:{top:["Pantheon",["Sett"]], jungle:["Elise",["Nocturne"]], mid:["Twisted Fate",["LeBlanc","Galio"]], adc:["Ashe",["Varus"]], supp:["Pyke",["Bard","Blitzcrank"]]},
    win:"Vision + roams, chopper une cible isolée puis forcer un objectif en 5v4. TF = set-up/macro globale ; LeBlanc = exécution + snowball solo (elle burst la cible attrapée et fall off en late, identité early parfaite).",
    spike:"9-14 min",
@@ -354,6 +375,7 @@ const COMPS = [
    ]},
 
   {cat:"early", name:"Lane Bully — Push & Pressure", arch:"Domination de lane early", diff:"Moyenne",
+   weak:"Les <b>hyperscalers</b> qui survivent à ta pression (Vladimir, Kayle, Mundo) : si tu ne convertis pas ton avance en tours/héraut avant ~20 min, tu te fais dépasser.",
    roles:{top:["Aurora",["Renekton"]], jungle:["Nidalee",["Graves"]], mid:["LeBlanc",["Syndra","Taliyah"]], adc:["Caitlyn",["Draven"]], supp:["Leona",["Nautilus","Lux"]]},
    win:"Gagner les 3 lanes au CS et à la pression, prio carte → héraut → tours, fracturer avant l'arrivée des scalers.",
    spike:"3-12 min",
@@ -371,6 +393,7 @@ const COMPS = [
    ]},
 
   {cat:"early", name:"Invade — Level 1-3 cheese", arch:"Skirmish / Invade early", diff:"Élevée",
+   weak:"Un invade <b>lu ou raté</b> : les jglers duelistes (Graves, Briar) gagnent les duels lvl 1-3 et les lanes qui collapse sur ton entrée retournent le cheese contre toi.",
    roles:{top:["Jax",["Camille"]], jungle:["Lee Sin",["Xin Zhao","Nidalee"]], mid:["Galio",["Ahri"]], adc:["Lucian",["Kalista"]], supp:["Rell",["Leona","Nautilus"]]},
    win:"Contrôler la jungle ennemie, invade niveau 1-3, étouffer/retarder le jungler adverse, ganks répétés tôt.",
    spike:"2-9 min",
@@ -389,6 +412,7 @@ const COMPS = [
 
   // ---------- MID / LATE ----------
   {cat:"mid", name:"Wombo Combo — AoE engage", arch:"Engage / Wombo", diff:"Moyenne",
+   weak:"Le <b>disengage et le poke</b> (Janna, Sivir, Lulu) : on te casse avant l'engage, et sans ton combo AoE groupé tu n'as pas de plan B.",
    roles:{top:["Malphite",["Ornn"]], jungle:["Wukong",["Sejuani","Amumu"]], mid:["Yasuo",["Viktor","Orianna"]], adc:["Miss Fortune",["Jinx"]], supp:["Rell",["Leona","Nautilus"]]},
    win:"Group à 5 dès 2 items, enchaîner les CC AoE et effacer les teamfights groupés.",
    spike:"20-30 min",
@@ -405,6 +429,7 @@ const COMPS = [
    ]},
 
   {cat:"mid", name:"Burst — Pick assassins", arch:"Pick / Burst", diff:"Élevée",
+   weak:"Les compos <b>sans cible isolée</b> + peel (Lulu, Janna, Tahm Kench) : si le oneshot ne passe pas, tes assassins fondent dans un fight prolongé.",
    roles:{top:["Camille",["Pantheon"]], jungle:["Nocturne",["Kha'Zix"]], mid:["Zed",["Sylas","Akali"]], adc:["Varus",["Caitlyn"]], supp:["Pyke",["Thresh"]]},
    win:"Mid-game, lock + oneshot une cible prioritaire avec un combo d'assassins coordonné, jouer en 5v4.",
    spike:"15-25 min",
@@ -421,6 +446,7 @@ const COMPS = [
    ]},
 
   {cat:"mid", name:"Front-to-Back — Bruiser teamfight", arch:"Teamfight / Tempo", diff:"Moyenne",
+   weak:"Le DPS <b>% vie</b> (Vayne) qui fond ta frontline et l'AoE qui efface le groupe (Fiddle) avant que Jinx s'exprime ; le poke long t'empêche d'approcher.",
    roles:{top:["Aatrox",["K'Sante","Sett"]], jungle:["Sejuani",["Vi","Xin Zhao"]], mid:["Orianna",["Vladimir"]], adc:["Jinx",["Aphelios"]], supp:["Nautilus",["Alistar","Leona"]]},
    win:"Front line solide + DPS sustained, gagner les teamfights mid-game autour des drakes et contrôler le drake soul.",
    spike:"20-30 min",
@@ -437,6 +463,7 @@ const COMPS = [
    ]},
 
   {cat:"mid", name:"Tempo — Contrôle d'objectifs", arch:"Tempo / Objectifs", diff:"Moyenne",
+   weak:"Un jgl qui <b>conteste chaque pit</b> (Briar) ou flip tes fights de zone (Gragas, Nocturne) : perds le 1er objectif et tout ton tempo s'effondre.",
    roles:{top:["Jax",["Gnar"]], jungle:["Vi",["Jarvan IV","Sejuani"]], mid:["Taliyah",["Azir"]], adc:["Ezreal",["Kai'Sa"]], supp:["Bard",["Rakan","Thresh"]]},
    win:"Dominer chaque set-up d'objectif via un pick, prendre tempo et drake soul en jouant les fights en 5v4.",
    spike:"15-28 min",
@@ -455,6 +482,7 @@ const COMPS = [
 
   // ---------- SCALE & SAFE ----------
   {cat:"scale", name:"Protect the Carry — Hypercarry", arch:"Protect / Hypercarry", diff:"Moyenne",
+   weak:"Le <b>dive sur backline</b> (Kha'Zix, Nocturne, Malphite) : un seul saut qui passe la peel et ton hypercarry meurt avant d'avoir DPS.",
    roles:{top:["Ornn",["Shen"]], jungle:["Sejuani",["Maokai"]], mid:["Orianna",["Viktor","Syndra"]], adc:["Jinx",["Kog'Maw","Aphelios"]], supp:["Milio",["Lulu","Janna"]]},
    win:"Survivre l'early, tout funnel sur l'ADC, atteindre 3-4 items et le protéger pour qu'il 1v9 les teamfights late. Orianna donne la peel + le Shockwave ; Syndra possible comme dégâts secondaires mais on troque la peel contre du burst (il faut alors un jgl/supp qui peel les carries).",
    spike:"30+ min",
@@ -471,6 +499,7 @@ const COMPS = [
    ]},
 
   {cat:"scale", name:"Split Push 1-3-1", arch:"Split / Macro", diff:"Élevée",
+   weak:"Le <b>counter-split</b> (Jax, Fiora, Shen) et les compos de teamfight qui forcent le 5v5 pendant que ton splitpush est seul ailleurs.",
    roles:{top:["Tryndamere",["Camille"]], jungle:["Shyvana",["Trundle"]], mid:["Azir",["Cassiopeia"]], adc:["Ezreal",["Sivir"]], supp:["Tahm Kench",["Galio"]]},
    win:"Étirer la map en 1-3-1, créer des side-lane threats imperdables, forcer des collapses et prendre tours/baron en cross-map.",
    spike:"25+ min",
@@ -487,6 +516,7 @@ const COMPS = [
    ]},
 
   {cat:"scale", name:"Poke / Siège — Artillery", arch:"Poke / Siege", diff:"Moyenne",
+   weak:"L'<b>engage qui ferme la distance</b> (Malphite, Nocturne, Hecarim) : un seul all-in ou flanc sur tes squishies et tout le siège s'effondre.",
    roles:{top:["Jayce",["Kennen"]], jungle:["Karthus",["Nidalee"]], mid:["Xerath",["Syndra","Ziggs","Vel'Koz"]], adc:["Ezreal",["Varus"]], supp:["Karma",["Lux","Zilean"]]},
    win:"Poke la team ennemie sous 50% HP avant chaque fight, siéger les tours et gagner la guerre d'attrition sans s'engager. Xerath/Ziggs ont plus de portée pour le siège pur ; Syndra apporte un vrai burst de pick QE+R.",
    spike:"18-30 min",
@@ -503,6 +533,7 @@ const COMPS = [
    ]},
 
   {cat:"scale", name:"Scaling Insurance — Safe scalers", arch:"Scaling pur / Safe", diff:"Moyenne",
+   weak:"Le <b>snowball early</b> (Renekton, Draven, Lee Sin) : si une lane explose avant 30 min, tu n'atteins jamais ton spike de scaling.",
    roles:{top:["Kayle",["Nasus"]], jungle:["Sejuani",["Karthus","Master Yi"]], mid:["Vladimir",["Veigar","Kassadin"]], adc:["Kog'Maw",["Vayne"]], supp:["Milio",["Soraka","Lulu"]]},
    win:"Chaque lane prend un scaler safe imperdable, avec un jungle tank-CC (Sejuani) pour les protéger ; jouer défensif et surclasser l'adversaire par les stats en late.",
    spike:"30-40 min",
@@ -537,7 +568,7 @@ COMPS.forEach((c,i) => {
     const [main,alts] = c.roles[k];
     const altTxt = alts.length ? `<span class="alt">alt · ${alts.join(", ")}</span>` : "";
     const full = idx === 4 ? " full" : "";
-    return `<div class="rcell${full}"><span class="rk">${label}</span><span class="rv"><span class="mn">${main}</span>${altTxt}</span></div>`;
+    return `<div class="rcell${full}"><span class="rk">${label}</span><span class="rv">${champImg(main)}<span class="rtxt"><span class="mn">${main}</span>${altTxt}</span></span></div>`;
   }).join("");
 
   const timeline = c.plan.map(([t,x]) =>
@@ -553,11 +584,12 @@ COMPS.forEach((c,i) => {
     `<div class="d-row"><span class="d-tag d-red">Côté rouge</span><div>${c.side.red}</div></div>`;
 
   const banItems = c.bans.map((b,bi) =>
-    `<div class="ban-item${bi===0?" ban-abs":""}"><span class="bnum">${bi+1}</span><div>${bi===0?`<span class="champ">${b[0]}</span>`:`<span class="bname">${b[0]}</span>`} · ${b[1]}</div></div>`).join("");
+    `<div class="ban-item${bi===0?" ban-abs":""}"><span class="bnum">${bi+1}</span>${champImg(b[0])}<div>${bi===0?`<span class="champ">${b[0]}</span>`:`<span class="bname">${b[0]}</span>`} · ${b[1]}</div></div>`).join("");
 
   DETAILS[i] = `
     <div class="roles">${cells}</div>
     <div class="block win"><div class="bk">Win condition</div><p>${c.win}</p></div>
+    <div class="block weak"><div class="bk">Ce qui vous bat</div><p>${c.weak}</p></div>
     <div class="block draft"><div class="bk">Draft — ordre de pick ${sideBadge}</div><div class="dlist">${draftRows}</div></div>
     <div class="block plan"><div class="bk">Plan de jeu — timings</div><div class="tl">${timeline}</div></div>
     <div class="block path"><div class="bk">Pathing jungle — 1er clear <span class="pathimp pi-${PATH_IMP[c.path.imp]||'low'}">${c.path.imp}</span></div><p>${c.path.text}</p></div>

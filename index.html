@@ -274,7 +274,7 @@
   <div class="row">
     <div class="brand">
       <span class="t">Draft Board</span>
-      <span class="s">12 compos méta + 3 équipe &nbsp;·&nbsp; patch <b>26.11</b> &nbsp;·&nbsp; platine+ &nbsp;·&nbsp; flex &nbsp;·&nbsp; <span title="Méta revérifiée à cette date — re-check à chaque gros patch">màj 11/06</span></span>
+      <span class="s">12 compos méta + 4 équipe &nbsp;·&nbsp; patch <b>26.11</b> &nbsp;·&nbsp; platine+ &nbsp;·&nbsp; flex &nbsp;·&nbsp; <span title="Méta revérifiée à cette date — re-check à chaque gros patch">màj 11/06</span></span>
     </div>
     <div class="seg" id="filters">
       <button class="active" data-cat="all">All</button>
@@ -336,7 +336,7 @@ const PATH_IMP = {"Crucial":"crit","Important":"warn","Modérée":"info","Faible
 
 // Portraits champions via Riot Data Dragon (CDN). Map nom affiché -> id d'image (ids irréguliers : Wukong=MonkeyKing, Dr. Mundo=DrMundo…).
 const DDV = "16.12.1";
-const CHAMP_ID = {"Diana":"Diana","Viego":"Viego","Olaf":"Olaf","Garen":"Garen","Jhin":"Jhin","Darius":"Darius","Aatrox":"Aatrox","Ahri":"Ahri","Akali":"Akali","Alistar":"Alistar","Amumu":"Amumu","Aphelios":"Aphelios","Ashe":"Ashe","Aurora":"Aurora","Azir":"Azir","Bard":"Bard","Blitzcrank":"Blitzcrank","Briar":"Briar","Caitlyn":"Caitlyn","Camille":"Camille","Cassiopeia":"Cassiopeia","Draven":"Draven","Dr. Mundo":"DrMundo","Ekko":"Ekko","Elise":"Elise","Ezreal":"Ezreal","Fiddlesticks":"Fiddlesticks","Fiora":"Fiora","Galio":"Galio","Gangplank":"Gangplank","Gnar":"Gnar","Gragas":"Gragas","Graves":"Graves","Hecarim":"Hecarim","Janna":"Janna","Jarvan IV":"JarvanIV","Jax":"Jax","Jayce":"Jayce","Jinx":"Jinx","Kai'Sa":"Kaisa","Kalista":"Kalista","Karma":"Karma","Karthus":"Karthus","Kassadin":"Kassadin","Kayle":"Kayle","Kennen":"Kennen","Kha'Zix":"Khazix","Kog'Maw":"KogMaw","K'Sante":"KSante","LeBlanc":"Leblanc","Lee Sin":"LeeSin","Leona":"Leona","Lucian":"Lucian","Lulu":"Lulu","Lux":"Lux","Malphite":"Malphite","Malzahar":"Malzahar","Maokai":"Maokai","Master Yi":"MasterYi","Milio":"Milio","Miss Fortune":"MissFortune","Wukong":"MonkeyKing","Morgana":"Morgana","Nasus":"Nasus","Nautilus":"Nautilus","Nidalee":"Nidalee","Nocturne":"Nocturne","Orianna":"Orianna","Ornn":"Ornn","Pantheon":"Pantheon","Pyke":"Pyke","Rakan":"Rakan","Rell":"Rell","Renekton":"Renekton","Sejuani":"Sejuani","Sett":"Sett","Shen":"Shen","Shyvana":"Shyvana","Sivir":"Sivir","Soraka":"Soraka","Sylas":"Sylas","Syndra":"Syndra","Tahm Kench":"TahmKench","Taliyah":"Taliyah","Thresh":"Thresh","Trundle":"Trundle","Tryndamere":"Tryndamere","Twisted Fate":"TwistedFate","Varus":"Varus","Vayne":"Vayne","Veigar":"Veigar","Vel'Koz":"Velkoz","Vi":"Vi","Viktor":"Viktor","Vladimir":"Vladimir","Xerath":"Xerath","Xin Zhao":"XinZhao","Yasuo":"Yasuo","Zed":"Zed","Ziggs":"Ziggs","Zilean":"Zilean"};
+const CHAMP_ID = {"Diana":"Diana","Viego":"Viego","Olaf":"Olaf","Garen":"Garen","Jhin":"Jhin","Darius":"Darius","Zyra":"Zyra","Senna":"Senna","Aatrox":"Aatrox","Ahri":"Ahri","Akali":"Akali","Alistar":"Alistar","Amumu":"Amumu","Aphelios":"Aphelios","Ashe":"Ashe","Aurora":"Aurora","Azir":"Azir","Bard":"Bard","Blitzcrank":"Blitzcrank","Briar":"Briar","Caitlyn":"Caitlyn","Camille":"Camille","Cassiopeia":"Cassiopeia","Draven":"Draven","Dr. Mundo":"DrMundo","Ekko":"Ekko","Elise":"Elise","Ezreal":"Ezreal","Fiddlesticks":"Fiddlesticks","Fiora":"Fiora","Galio":"Galio","Gangplank":"Gangplank","Gnar":"Gnar","Gragas":"Gragas","Graves":"Graves","Hecarim":"Hecarim","Janna":"Janna","Jarvan IV":"JarvanIV","Jax":"Jax","Jayce":"Jayce","Jinx":"Jinx","Kai'Sa":"Kaisa","Kalista":"Kalista","Karma":"Karma","Karthus":"Karthus","Kassadin":"Kassadin","Kayle":"Kayle","Kennen":"Kennen","Kha'Zix":"Khazix","Kog'Maw":"KogMaw","K'Sante":"KSante","LeBlanc":"Leblanc","Lee Sin":"LeeSin","Leona":"Leona","Lucian":"Lucian","Lulu":"Lulu","Lux":"Lux","Malphite":"Malphite","Malzahar":"Malzahar","Maokai":"Maokai","Master Yi":"MasterYi","Milio":"Milio","Miss Fortune":"MissFortune","Wukong":"MonkeyKing","Morgana":"Morgana","Nasus":"Nasus","Nautilus":"Nautilus","Nidalee":"Nidalee","Nocturne":"Nocturne","Orianna":"Orianna","Ornn":"Ornn","Pantheon":"Pantheon","Pyke":"Pyke","Rakan":"Rakan","Rell":"Rell","Renekton":"Renekton","Sejuani":"Sejuani","Sett":"Sett","Shen":"Shen","Shyvana":"Shyvana","Sivir":"Sivir","Soraka":"Soraka","Sylas":"Sylas","Syndra":"Syndra","Tahm Kench":"TahmKench","Taliyah":"Taliyah","Thresh":"Thresh","Trundle":"Trundle","Tryndamere":"Tryndamere","Twisted Fate":"TwistedFate","Varus":"Varus","Vayne":"Vayne","Veigar":"Veigar","Vel'Koz":"Velkoz","Vi":"Vi","Viktor":"Viktor","Vladimir":"Vladimir","Xerath":"Xerath","Xin Zhao":"XinZhao","Yasuo":"Yasuo","Zed":"Zed","Ziggs":"Ziggs","Zilean":"Zilean"};
 const champImg = (name, cls="cimg") => {
   const id = CHAMP_ID[name];
   return id ? `<img class="${cls}" src="https://ddragon.leagueoflegends.com/cdn/${DDV}/img/champion/${id}.png" alt="" loading="lazy" onerror="this.remove()">` : "";
@@ -611,6 +611,24 @@ const COMPS = [
      ["Drakes","Priorise le <b>soul</b> : ta frontline sécurise le pit, tu gagnes le 5v5."],
      ["15:00","<b>Héraut</b> : teamfight groupé, Syndra R sur l'engage Maokai."],
      ["20:00+","<b>Baron</b> : front-to-back autour du pit, Caitlyn free DPS protégée."],
+   ]},
+
+  {cat:"team", name:"Notre Sustain & Scale — Soraka (Yuna)", arch:"Scaling / sustain · Ororaa SUPP", diff:"Moyenne",
+   players:{top:"Baston 2 rue", jungle:"Coup Du Destin", mid:"Niir", adc:"Le Pouj", supp:"Yuna (Ororaa)"},
+   weak:"Le <b>burst/dive</b> qui tue à travers le heal (assassins, pick comps) avant que Soraka réagisse, et l'<b>anti-heal</b> (Morellonomicon, exécutions) qui annule son kit. Faible en lane 2v2 → punissable par un snowball bot (Draven).",
+   roles:{top:["Olaf",["Sett","Garen"]], jungle:["Shyvana",["Viego"]], mid:["Syndra",["LeBlanc"]], adc:["Sivir",["Miss Fortune","Senna"]], supp:["Soraka",["Lux","Zyra"]]},
+   win:"Gagner la guerre d'usure : Soraka heal/sustain à travers le poke pendant que Sivir et Syndra scalent et surclassent en late. Group à 5, prends les fights quand vos items sont online. Pick Soraka safe pour Ororaa (peu de mécaniques, gros impact d'équipe).",
+   spike:"25-35 min",
+   combo:"Sivir R (vitesse de groupe) pour engage/disengage → Soraka W heal + E silence sur l'engage adverse → Syndra E-Q stun-burst → l'attrition tourne en votre faveur.",
+   path:{imp:"Faible",text:"Shyvana = power farm : full clear le plus rapide, empile camps + drakes pour le tempo, évite les fights early. Tu scales pour le late, pas pour ganker ; protège la bot d'Ororaa des invades/ganks."},
+   draft:{first:["Sivir","ADC scaling blind-safe (spell shield + R utilitaire) : aucun contre de draft."],last:["Syndra","Garde la mid-scale pour la fin pour confirmer un matchup (ou Sivir last pour cacher le scale)."],flex:"Shyvana (jgl/top), Syndra (mid). Soraka est blind-safe pour Ororaa. <b>Swap</b> : si Ororaa joue, Le Pouj repasse ADC ; sinon Le Pouj SUPP et SDO/Cait reviennent à la bot habituelle."},
+   side:{best:"Rouge",blue:"Si bleu : first-pick Sivir/Soraka et accepte des matchups plus exposés (ban les bullies bot).",red:"Côté idéal : last-pick Syndra/Sivir pour cacher le scale et confirmer des lanes tenables."},
+   bans:[["Draven","Snowball bot qui punit directement la lane 2v2 d'Ororaa et ferme la partie avant ton spike."],["Nocturne","Fear + dash : il passe le peel et saute la backline à travers le heal."],["Malphite","Son R engage le groupe sustain et oneshot un carry avant que Soraka réagisse."]],
+   plan:[
+     ["0:00 – 15:00","<b>Survis et farm</b> (Sivir/Syndra), bot safe pour Ororaa, cède les trades douteux."],
+     ["Drakes","Prends-les <b>safe</b> seulement quand tes carries sont en avance d'items."],
+     ["20:00 baron","Ne le force pas : patience, poke + sustain, défends sous tour."],
+     ["25:00+","<b>Teamfights late</b> : Soraka heal en continu, Sivir/Syndra surclassent. C'est là que vous gagnez."],
    ]},
 ];
 

@@ -32,7 +32,7 @@
     --bg:#f3f0e9; --surface:#fbf9f3; --surface2:#f6f3eb; --raised:#eeeae0;
     --line:#e7e2d6; --line2:#d8d2c3;
     --ink:#201d18; --ink2:#433f37; --mute:#736d62; --mute2:#9c9585;
-    --early:#e5484d; --mid:#7c5cff; --scale:#0fa968;
+    --early:#e5484d; --mid:#7c5cff; --scale:#0fa968; --team:#0d9488;
     --amber:#b5760a; --ban:#e5484d;
     --sans:"Inter","Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
     --mono:ui-monospace,"SF Mono","Cascadia Code","Cascadia Mono",Consolas,"Liberation Mono",monospace;
@@ -74,6 +74,7 @@
   .seg button[data-cat="early"].active{background:var(--early)}
   .seg button[data-cat="mid"].active{background:var(--mid)}
   .seg button[data-cat="scale"].active{background:var(--scale)}
+  .seg button[data-cat="team"].active{background:var(--team)}
 
   .search{position:relative; display:flex; align-items:center}
   .search input{
@@ -95,7 +96,7 @@
   .strip .count{font-family:var(--mono); font-size:12px; color:var(--mute); letter-spacing:.04em}
   .strip .legend{display:flex; gap:16px; font-family:var(--mono); font-size:11px; color:var(--mute); letter-spacing:.03em}
   .strip .legend i{display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:6px; vertical-align:1px}
-  .lg-early i{background:var(--early)} .lg-mid i{background:var(--mid)} .lg-scale i{background:var(--scale)}
+  .lg-early i{background:var(--early)} .lg-mid i{background:var(--mid)} .lg-scale i{background:var(--scale)} .lg-team i{background:var(--team)}
 
   /* ---------- grid / cards ---------- */
   .grid{
@@ -111,6 +112,7 @@
   .card[data-cat="early"]{--ac:var(--early)}
   .card[data-cat="mid"]{--ac:var(--mid)}
   .card[data-cat="scale"]{--ac:var(--scale)}
+  .card[data-cat="team"]{--ac:var(--team)}
   .card:hover{border-color:var(--line2); box-shadow:0 10px 28px -14px rgba(20,22,28,.28)}
 
   .head{padding:18px 20px 16px; cursor:pointer; user-select:none}
@@ -137,6 +139,7 @@
   .rcell{background:var(--surface); padding:9px 12px; display:flex; flex-direction:column; gap:5px}
   .rcell.full{grid-column:1/-1; background:var(--surface2)}
   .rcell .rk{font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--mute2)}
+  .rcell .rk .who{margin-left:7px; color:var(--ac,#7c5cff); font-weight:700; text-transform:none; letter-spacing:.02em}
   .rcell .rv{display:flex; align-items:center; gap:9px; min-width:0}
   .rtxt{display:flex; flex-direction:column; min-width:0}
   .rcell .rv .mn{font-size:14px; font-weight:600; color:var(--ink)}
@@ -241,6 +244,7 @@
   .modal[data-cat="early"]{--ac:var(--early)}
   .modal[data-cat="mid"]{--ac:var(--mid)}
   .modal[data-cat="scale"]{--ac:var(--scale)}
+  .modal[data-cat="team"]{--ac:var(--team)}
   .modal-overlay.open .modal{transform:none}
   .modal-head{position:relative; display:flex; align-items:flex-start; gap:14px; padding:20px 52px 18px 22px; border-bottom:1px solid var(--line)}
   .modal-head .titlewrap{flex:1; min-width:0}
@@ -270,13 +274,14 @@
   <div class="row">
     <div class="brand">
       <span class="t">Draft Board</span>
-      <span class="s">12 compositions &nbsp;·&nbsp; patch <b>26.11</b> &nbsp;·&nbsp; platine+ &nbsp;·&nbsp; flex &nbsp;·&nbsp; <span title="Méta revérifiée à cette date — re-check à chaque gros patch">màj 11/06</span></span>
+      <span class="s">12 compos méta + 3 équipe &nbsp;·&nbsp; patch <b>26.11</b> &nbsp;·&nbsp; platine+ &nbsp;·&nbsp; flex &nbsp;·&nbsp; <span title="Méta revérifiée à cette date — re-check à chaque gros patch">màj 11/06</span></span>
     </div>
     <div class="seg" id="filters">
       <button class="active" data-cat="all">All</button>
       <button data-cat="early">Early</button>
       <button data-cat="mid">Mid</button>
       <button data-cat="scale">Scale</button>
+      <button data-cat="team">Équipe</button>
     </div>
     <div class="search">
       <span class="ic">⌕</span>
@@ -292,6 +297,7 @@
     <span class="lg-early"><i></i>Ultra Early</span>
     <span class="lg-mid"><i></i>Mid / Late</span>
     <span class="lg-scale"><i></i>Scale &amp; Safe</span>
+    <span class="lg-team"><i></i>Notre équipe</span>
   </span>
 </div>
 
@@ -319,17 +325,18 @@
   Timings d'objectifs 2026 : drake ~5:00 · Voidgrubs 6:00 · plates permanentes (or -10/min dès 11:00) · héraut 15:00 · baron 20:00.<br>
   <b>Bans</b> : n°1 = ban absolu (le contre direct de la win condition) ; n°2/3 = bans de confort.<br>
   <b>Draft</b> : First pick = à prendre tôt (sûr/flex) · Last pick = à garder pour la fin (contre-pick) · Flex = pickable sur plusieurs rôles pour cacher ton jeu.<br>
-  <b>Données</b> vérifiées le <b>11 juin 2026</b> (méta 26.11), validées par panel d'analystes — à re-checker à chaque gros patch. Portraits : Riot Data Dragon 16.12.1.
+  <b>Données</b> vérifiées le <b>11 juin 2026</b> (méta 26.11), validées par panel d'analystes — à re-checker à chaque gros patch. Portraits : Riot Data Dragon 16.12.1.<br>
+  <b>Onglet « Notre équipe »</b> : compos bâties sur les pools réels (u.gg, saison 26, parties classées flex) de Niir · Baston 2 rue · Coup Du Destin · Le Pouj · SDO Kadhafi (+ Ororaa en remplaçante).
 </footer>
 
 <script>
 const ROLES = [["top","Top"],["jungle","Jungle"],["mid","Mid"],["adc","ADC"],["supp","Support"]];
-const CAT_LABEL = {early:"Early", mid:"Mid · Late", scale:"Scale"};
+const CAT_LABEL = {early:"Early", mid:"Mid · Late", scale:"Scale", team:"Notre équipe"};
 const PATH_IMP = {"Crucial":"crit","Important":"warn","Modérée":"info","Faible":"low"};
 
 // Portraits champions via Riot Data Dragon (CDN). Map nom affiché -> id d'image (ids irréguliers : Wukong=MonkeyKing, Dr. Mundo=DrMundo…).
 const DDV = "16.12.1";
-const CHAMP_ID = {"Aatrox":"Aatrox","Ahri":"Ahri","Akali":"Akali","Alistar":"Alistar","Amumu":"Amumu","Aphelios":"Aphelios","Ashe":"Ashe","Aurora":"Aurora","Azir":"Azir","Bard":"Bard","Blitzcrank":"Blitzcrank","Briar":"Briar","Caitlyn":"Caitlyn","Camille":"Camille","Cassiopeia":"Cassiopeia","Draven":"Draven","Dr. Mundo":"DrMundo","Ekko":"Ekko","Elise":"Elise","Ezreal":"Ezreal","Fiddlesticks":"Fiddlesticks","Fiora":"Fiora","Galio":"Galio","Gangplank":"Gangplank","Gnar":"Gnar","Gragas":"Gragas","Graves":"Graves","Hecarim":"Hecarim","Janna":"Janna","Jarvan IV":"JarvanIV","Jax":"Jax","Jayce":"Jayce","Jinx":"Jinx","Kai'Sa":"Kaisa","Kalista":"Kalista","Karma":"Karma","Karthus":"Karthus","Kassadin":"Kassadin","Kayle":"Kayle","Kennen":"Kennen","Kha'Zix":"Khazix","Kog'Maw":"KogMaw","K'Sante":"KSante","LeBlanc":"Leblanc","Lee Sin":"LeeSin","Leona":"Leona","Lucian":"Lucian","Lulu":"Lulu","Lux":"Lux","Malphite":"Malphite","Malzahar":"Malzahar","Maokai":"Maokai","Master Yi":"MasterYi","Milio":"Milio","Miss Fortune":"MissFortune","Wukong":"MonkeyKing","Morgana":"Morgana","Nasus":"Nasus","Nautilus":"Nautilus","Nidalee":"Nidalee","Nocturne":"Nocturne","Orianna":"Orianna","Ornn":"Ornn","Pantheon":"Pantheon","Pyke":"Pyke","Rakan":"Rakan","Rell":"Rell","Renekton":"Renekton","Sejuani":"Sejuani","Sett":"Sett","Shen":"Shen","Shyvana":"Shyvana","Sivir":"Sivir","Soraka":"Soraka","Sylas":"Sylas","Syndra":"Syndra","Tahm Kench":"TahmKench","Taliyah":"Taliyah","Thresh":"Thresh","Trundle":"Trundle","Tryndamere":"Tryndamere","Twisted Fate":"TwistedFate","Varus":"Varus","Vayne":"Vayne","Veigar":"Veigar","Vel'Koz":"Velkoz","Vi":"Vi","Viktor":"Viktor","Vladimir":"Vladimir","Xerath":"Xerath","Xin Zhao":"XinZhao","Yasuo":"Yasuo","Zed":"Zed","Ziggs":"Ziggs","Zilean":"Zilean"};
+const CHAMP_ID = {"Diana":"Diana","Viego":"Viego","Olaf":"Olaf","Garen":"Garen","Jhin":"Jhin","Darius":"Darius","Aatrox":"Aatrox","Ahri":"Ahri","Akali":"Akali","Alistar":"Alistar","Amumu":"Amumu","Aphelios":"Aphelios","Ashe":"Ashe","Aurora":"Aurora","Azir":"Azir","Bard":"Bard","Blitzcrank":"Blitzcrank","Briar":"Briar","Caitlyn":"Caitlyn","Camille":"Camille","Cassiopeia":"Cassiopeia","Draven":"Draven","Dr. Mundo":"DrMundo","Ekko":"Ekko","Elise":"Elise","Ezreal":"Ezreal","Fiddlesticks":"Fiddlesticks","Fiora":"Fiora","Galio":"Galio","Gangplank":"Gangplank","Gnar":"Gnar","Gragas":"Gragas","Graves":"Graves","Hecarim":"Hecarim","Janna":"Janna","Jarvan IV":"JarvanIV","Jax":"Jax","Jayce":"Jayce","Jinx":"Jinx","Kai'Sa":"Kaisa","Kalista":"Kalista","Karma":"Karma","Karthus":"Karthus","Kassadin":"Kassadin","Kayle":"Kayle","Kennen":"Kennen","Kha'Zix":"Khazix","Kog'Maw":"KogMaw","K'Sante":"KSante","LeBlanc":"Leblanc","Lee Sin":"LeeSin","Leona":"Leona","Lucian":"Lucian","Lulu":"Lulu","Lux":"Lux","Malphite":"Malphite","Malzahar":"Malzahar","Maokai":"Maokai","Master Yi":"MasterYi","Milio":"Milio","Miss Fortune":"MissFortune","Wukong":"MonkeyKing","Morgana":"Morgana","Nasus":"Nasus","Nautilus":"Nautilus","Nidalee":"Nidalee","Nocturne":"Nocturne","Orianna":"Orianna","Ornn":"Ornn","Pantheon":"Pantheon","Pyke":"Pyke","Rakan":"Rakan","Rell":"Rell","Renekton":"Renekton","Sejuani":"Sejuani","Sett":"Sett","Shen":"Shen","Shyvana":"Shyvana","Sivir":"Sivir","Soraka":"Soraka","Sylas":"Sylas","Syndra":"Syndra","Tahm Kench":"TahmKench","Taliyah":"Taliyah","Thresh":"Thresh","Trundle":"Trundle","Tryndamere":"Tryndamere","Twisted Fate":"TwistedFate","Varus":"Varus","Vayne":"Vayne","Veigar":"Veigar","Vel'Koz":"Velkoz","Vi":"Vi","Viktor":"Viktor","Vladimir":"Vladimir","Xerath":"Xerath","Xin Zhao":"XinZhao","Yasuo":"Yasuo","Zed":"Zed","Ziggs":"Ziggs","Zilean":"Zilean"};
 const champImg = (name, cls="cimg") => {
   const id = CHAMP_ID[name];
   return id ? `<img class="${cls}" src="https://ddragon.leagueoflegends.com/cdn/${DDV}/img/champion/${id}.png" alt="" loading="lazy" onerror="this.remove()">` : "";
@@ -548,6 +555,63 @@ const COMPS = [
      ["25:00 – 30:00","<b>Ton spike</b> : chaque membre surclasse son vis-à-vis. Commence à group."],
      ["Baron late","Prends-le quand tes scalers sont online, puis ferme la partie."],
    ]},
+
+  // ---------- NOTRE ÉQUIPE (pool de champions — data u.gg saison 26, flex) ----------
+  {cat:"team", name:"Notre Lane Bully — Caitlyn/Leona", arch:"Domination de lane early", diff:"Moyenne",
+   players:{top:"Baston 2 rue", jungle:"Coup Du Destin", mid:"Niir", adc:"SDO Kadhafi", supp:"Le Pouj"},
+   weak:"Les <b>hyperscalers</b> qui survivent à ta pression (Vladimir, Kayle) : si tu ne convertis pas ton avance en tours/héraut avant ~25 min, ils te dépassent. Le disengage (Janna) annule l'all-in Leona.",
+   roles:{top:["Jax",["Olaf","Garen"]], jungle:["Viego",["Nocturne","Diana"]], mid:["LeBlanc",["Syndra"]], adc:["Caitlyn",["Jhin"]], supp:["Leona",["Milio"]]},
+   win:"Gagner les lanes early : Caitlyn + Leona explosent la bot (poke + all-in niv 2-6), LeBlanc claque le mid, Jax + Viego mettent la pression. Convertir l'avance en plates → héraut → tours avant l'arrivée des scalers.",
+   spike:"2-12 min",
+   combo:"Leona E-Q engage → Caitlyn trap (W) + auto-Q → LeBlanc W-R en renfort / Viego nettoie. Niv 6 : Caitlyn R confirme.",
+   path:{imp:"Important",text:"Viego = gank bot tôt : la bot Caitlyn/Leona set up un kill garanti dès le niveau 3-4. Snowball la lane bully, contest scuttle bot, puis grubs à 6:00 avec la prio."},
+   draft:{first:["Leona","Engage supp blind-safe : elle pose le all-in bot et ne se contre pas vraiment."],last:["Caitlyn","Garde la bot pour la fin : pick dans une lane que tu domines (sinon Jax en contre-pick top)."],flex:"Jax (top/jgl), Viego (jgl). <b>Swap bot</b> : Le Pouj sait ADC (Senna/MF/Sivir) et SDO mid (Aurelion Sol/Viktor) ; Ororaa peut entrer SUPP (Soraka/Lux) pour libérer Le Pouj en ADC."},
+   side:{best:"Rouge",blue:"Si bleu : first-pick Leona (engage) et joue des bullies sûrs plutôt que des matchups risqués.",red:"Côté idéal : last-pick Caitlyn/Jax dans des lanes que tu domines — chaque contre-pick = une lane gagnée."},
+   bans:[["Janna","Son disengage (Monsoon) repousse l'all-in Leona et brise toute la pression bot."],["Vladimir","Quasi imperdable en lane, il survit à ta pression et te dépasse en late."],["Kayle","Hyperscaler imperdable qui encaisse l'early et te surclasse totalement en late."]],
+   plan:[
+     ["0:00 – 5:00","<b>Push et zone</b> les 3 lanes, prio bot avec Caitlyn/Leona, deny le CS."],
+     ["~5:00","<b>1er drake</b> avec la prio bot acquise."],
+     ["6:00","<b>Voidgrubs</b> : ton tempo de lanes = full grubs (gros buff de siège 2026)."],
+     ["8:00 – 11:00","<b>Plates</b> : max l'or AVANT la décote (-10g/min dès 11:00)."],
+     ["15:00","<b>Héraut</b> : transforme l'avance en tours et setup baron."],
+   ]},
+
+  {cat:"team", name:"Notre Pick & Dive", arch:"Pick / Dive — burst coordonné", diff:"Élevée",
+   players:{top:"Baston 2 rue", jungle:"Coup Du Destin", mid:"Niir", adc:"SDO Kadhafi", supp:"Le Pouj"},
+   weak:"Le <b>peel et le disengage</b> (Lulu, Janna, Tahm Kench) et les compos groupées anti-catch : si le dive rate, LeBlanc et Jhin fondent dans un fight prolongé.",
+   roles:{top:["Sett",["Sylas","Jax"]], jungle:["Nocturne",["Diana","Viego"]], mid:["LeBlanc",["Akali"]], adc:["Jhin",["Caitlyn"]], supp:["Leona",["Maokai"]]},
+   win:"Chopper et dive une cible isolée en mid-game. Nocturne R coupe la vision et lance le collapse, Leona/Sett lockdown, LeBlanc + Jhin burst. Jouer en 5v4 après chaque pick.",
+   spike:"9-16 min",
+   combo:"Nocturne R → Leona E-R + Sett W → LeBlanc W-R / Jhin W (root) → burst sur la cible clouée.",
+   path:{imp:"Crucial",text:"Nocturne path pour hit le niveau 6 vite → premier gank R (Paranoïa) sur une lane poussée (souvent mid avec Niir). Garde l'ult pour les fenêtres de pick ; avant 6, farm + scuttle, évite les ganks à mains nues."},
+   draft:{first:["Nocturne","Jgl à R global, dur à contrer : moteur des picks, bon premier pick (sinon Diana)."],last:["LeBlanc","Assassin sensible aux contres : pick-la en dernier (évite Malzahar/Kassadin) et confirme une cible squishy."],flex:"Diana (top/jgl), Sylas (mid/top), Viego (jgl). <b>Swap bot</b> : Le Pouj ⇄ SDO (Le Pouj Senna/MF, SDO Caitlyn) selon le matchup."},
+   side:{best:"Bleu",blue:"Côté idéal : first-pick Nocturne/Leona pour verrouiller le tempo de pick.",red:"Garde LeBlanc en dernier pour esquiver les contres et confirmer une cible à dive."},
+   bans:[["Lulu","Wild Growth + polymorph annulent le burst sur la cible protégée et désamorcent le dive."],["Tahm Kench","Avale la cible du dive et annule ton oneshot."],["Morgana","Son Black Shield bloque le lockdown Leona/Nocturne et le combo LeBlanc."]],
+   plan:[
+     ["0:00 – 13:00","<b>Snowball les lanes solo</b>, prends les fenêtres de roam, évite les 5v5 longs."],
+     ["6:00","<b>Voidgrubs</b> : cherche un pick autour du camp avec Nocturne."],
+     ["9:00 – 16:00","<b>Fenêtre de pick</b> (R up) : un catch = drake ou tour en 5v4."],
+     ["15:00","<b>Héraut</b> : pick sur une cible isolée → objectif gratuit."],
+     ["20:00+","<b>Baron</b> : dive le carry adverse <i>avant</i> de claim le pit."],
+   ]},
+
+  {cat:"team", name:"Notre Front-to-Back — Teamfight", arch:"Teamfight / Tempo", diff:"Moyenne",
+   players:{top:"Baston 2 rue", jungle:"Coup Du Destin", mid:"Niir", adc:"SDO Kadhafi", supp:"Le Pouj"},
+   weak:"Le DPS <b>% vie</b> (Vayne) qui fond ta frontline et l'AoE qui efface le groupe (Fiddle) avant que Caitlyn s'exprime ; le poke long t'empêche d'approcher.",
+   roles:{top:["Olaf",["Darius","Sett"]], jungle:["Shyvana",["Viego"]], mid:["Syndra",["LeBlanc"]], adc:["Caitlyn",["Jhin"]], supp:["Maokai",["Milio"]]},
+   win:"Front line solide (Olaf/Shyvana/Maokai) + DPS sustained Caitlyn + contrôle Syndra. Gagner les teamfights mid-game autour des drakes et sécuriser le drake soul.",
+   spike:"20-30 min",
+   combo:"Maokai R (saplings) engage → Syndra R (Unleashed Power) sur le regroupement → Caitlyn free DPS, Olaf cleanup.",
+   path:{imp:"Modérée",text:"Shyvana = power farm : full clear rapide, empile camps + drakes pour le tempo, set up grubs 6:00. Engage les objectifs avec la team, gank si la lane a du CC (Maokai/Leona) à enchaîner."},
+   draft:{first:["Maokai","Frontline/engage supp blind-safe : peel + lockdown, impossible à vraiment contrer."],last:["Olaf","Bruiser counterpick : garde le top pour la fin pour gagner / ne pas perdre le matchup (sinon Darius)."],flex:"Shyvana (jgl/top), Syndra (mid). <b>Swap bot</b> : Le Pouj peut ADC (MF/Sivir) et SDO mid (Aurelion Sol/Viktor) si tu veux un autre profil."},
+   side:{best:"Bleu",blue:"Côté idéal : first-pick Maokai (engage flex). Compo de teamfight qui n'a pas besoin de contre.",red:"Last-pick Olaf/Darius pour ne pas perdre le top."},
+   bans:[["Vayne","Fond ta frontline en dégâts % HP et kite tout le front-to-back."],["Fiddlesticks","Son R (crowstorm + fear) efface une équipe groupée avant que Caitlyn s'exprime."],["Gangplank","Ses barils zonent ton équipe groupée et punissent le regroupement."]],
+   plan:[
+     ["0:00 – 14:00","Farm et scale, tempo de drakes avec Shyvana/Maokai, ne split pas."],
+     ["Drakes","Priorise le <b>soul</b> : ta frontline sécurise le pit, tu gagnes le 5v5."],
+     ["15:00","<b>Héraut</b> : teamfight groupé, Syndra R sur l'engage Maokai."],
+     ["20:00+","<b>Baron</b> : front-to-back autour du pit, Caitlyn free DPS protégée."],
+   ]},
 ];
 
 const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
@@ -567,8 +631,9 @@ COMPS.forEach((c,i) => {
   const cells = ROLES.map(([k,label],idx) => {
     const [main,alts] = c.roles[k];
     const altTxt = alts.length ? `<span class="alt">alt · ${alts.join(", ")}</span>` : "";
+    const who = (c.players && c.players[k]) ? `<span class="who">${c.players[k]}</span>` : "";
     const full = idx === 4 ? " full" : "";
-    return `<div class="rcell${full}"><span class="rk">${label}</span><span class="rv">${champImg(main)}<span class="rtxt"><span class="mn">${main}</span>${altTxt}</span></span></div>`;
+    return `<div class="rcell${full}"><span class="rk">${label}${who}</span><span class="rv">${champImg(main)}<span class="rtxt"><span class="mn">${main}</span>${altTxt}</span></span></div>`;
   }).join("");
 
   const timeline = c.plan.map(([t,x]) =>

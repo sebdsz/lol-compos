@@ -23,3 +23,10 @@ def test_account_url():
     url = riot_client.account_url("Niir", "EUW")
     assert "europe.api.riotgames.com" in url
     assert "/riot/account/v1/accounts/by-riot-id/Niir/EUW" in url
+
+
+def test_headers_include_browser_user_agent():
+    # Sans User-Agent navigateur, Cloudflare bloque (error code 1010). Régression à verrouiller.
+    h = riot_client._headers("RGAPI-test")
+    assert h["X-Riot-Token"] == "RGAPI-test"
+    assert "Mozilla" in h["User-Agent"]

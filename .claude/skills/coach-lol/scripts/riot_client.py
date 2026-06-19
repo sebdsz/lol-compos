@@ -8,9 +8,24 @@ import config
 
 _CLUSTER = f"https://{config.REGION_CLUSTER}.api.riotgames.com"
 
+# Sans un User-Agent navigateur, l'edge Cloudflare de Riot bloque urllib
+# (réponse "error code: 1010"). Indispensable pour que les appels passent.
+_BROWSER_UA = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+)
+
 
 class RiotError(Exception):
     pass
+
+
+def _headers(api_key):
+    return {
+        "X-Riot-Token": api_key,
+        "User-Agent": _BROWSER_UA,
+        "Accept": "application/json",
+    }
 
 
 def explain_status(status):
@@ -35,7 +50,7 @@ def account_url(game_name, tag_line):
 
 
 def _get(url, api_key):
-    req = urllib.request.Request(url, headers={"X-Riot-Token": api_key})
+    req = urllib.request.Request(url, headers=_headers(api_key))
     try:
         with urllib.request.urlopen(req, timeout=20) as resp:
             return json.loads(resp.read().decode("utf-8"))

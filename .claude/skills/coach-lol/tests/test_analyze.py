@@ -36,3 +36,19 @@ def test_annotate_deaths():
     assert d["my_gold"] == 5000           # frame la plus proche
     assert d["allies_nearby"] == 0
     assert d["enemies_nearby"] >= 1
+
+
+def test_objectives_and_vision():
+    me = analyze.find_participant(MATCH, "PUUID_ME")
+    obj = analyze.objectives_and_vision(MATCH, TL, me)
+    assert obj["my_team_objectives"]["DRAGON"] == 0   # dragon pris par l'équipe 200
+    assert obj["enemy_objectives"]["DRAGON"] == 1
+    assert obj["vision_score"] == 14
+    assert obj["vision_target"] > 0
+
+
+def test_gold_lead_timeline():
+    me = analyze.find_participant(MATCH, "PUUID_ME")
+    series = analyze.team_gold_timeline(MATCH, TL, me)
+    # à 10 et 14 min mon équipe est derrière (or perso < adversaire ici)
+    assert series[-1]["my_team_gold"] < series[-1]["enemy_team_gold"]

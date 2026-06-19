@@ -122,3 +122,50 @@ def annotate_deaths(match, timeline, me):
                 "enemies_nearby": enemies,
             })
     return deaths
+
+
+_ELITE = ("DRAGON", "RIFTHERALD", "BARON_NASHOR")
+
+
+def objectives_and_vision(match, timeline, me):
+    my_team = me["teamId"]
+    mine = {k: 0 for k in _ELITE}
+    enemy = {k: 0 for k in _ELITE}
+    for frame in timeline["info"]["frames"]:
+        for ev in frame.get("events", []):
+            if ev.get("type") == "ELITE_MONSTER_KILL":
+                mtype = ev.get("monsterType")
+                if mtype not in mine:
+                    continue
+                if ev.get("killerTeamId") == my_team:
+                    mine[mtype] += 1
+                else:
+                    enemy[mtype] += 1
+    minutes = match["info"]["gameDuration"] / 60.0
+    return {
+        "my_team_objectives": mine,
+        "enemy_objectives": enemy,
+        "vision_score": me.get("visionScore"),
+        "vision_target": benchmarks.vision_target(me.get("teamPosition", "MIDDLE"), minutes),
+    }
+
+
+def team_gold_timeline(match, timeline, me):
+    my_team = me["teamId"]
+    team_of = {p["participantId"]: p["teamId"] for p in match["info"]["participants"]}
+    series = []
+    for frame in timeline["info"]["frames"]:
+        mine = enemy = 0
+        for pid_str, pf in frame["participantFrames"].items():
+            g = pf.get("totalGold", 0)
+            if team_of[int(pid_str)] == my_team:
+                mine += g
+            else:
+                enemy += g
+        series.append({
+            "minute": frame["timestamp"] // 60000,
+            "my_team_gold": mine,
+            "enemy_team_gold": enemy,
+            "diff": mine - enemy,
+        })
+    return series

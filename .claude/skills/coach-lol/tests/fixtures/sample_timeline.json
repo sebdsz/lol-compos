@@ -1,0 +1,27 @@
+{
+  "info": {
+    "frames": [
+      { "timestamp": 600000,
+        "participantFrames": {
+          "1": { "participantId": 1, "minionsKilled": 55, "jungleMinionsKilled": 0,
+                 "totalGold": 3500, "xp": 5000, "level": 8, "position": { "x": 7000, "y": 7400 } },
+          "6": { "participantId": 6, "minionsKilled": 70, "jungleMinionsKilled": 0,
+                 "totalGold": 4200, "xp": 5600, "level": 9, "position": { "x": 8000, "y": 8000 } }
+        },
+        "events": [] },
+      { "timestamp": 840000,
+        "participantFrames": {
+          "1": { "participantId": 1, "minionsKilled": 80, "jungleMinionsKilled": 0,
+                 "totalGold": 5000, "xp": 7500, "level": 10, "position": { "x": 11000, "y": 11000 } },
+          "6": { "participantId": 6, "minionsKilled": 110, "jungleMinionsKilled": 0,
+                 "totalGold": 7000, "xp": 8800, "level": 12, "position": { "x": 12200, "y": 9100 } }
+        },
+        "events": [
+          { "type": "CHAMPION_KILL", "timestamp": 800000, "killerId": 6, "victimId": 1,
+            "assistingParticipantIds": [], "position": { "x": 12000, "y": 9000 } },
+          { "type": "ELITE_MONSTER_KILL", "timestamp": 820000, "killerTeamId": 200,
+            "monsterType": "DRAGON" }
+        ] }
+    ]
+  }
+}

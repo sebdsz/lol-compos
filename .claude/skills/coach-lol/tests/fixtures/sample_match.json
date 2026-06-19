@@ -1,0 +1,16 @@
+{
+  "metadata": { "participants": ["PUUID_ME", "PUUID_ENEMY"] },
+  "info": {
+    "gameDuration": 1500,
+    "participants": [
+      { "puuid": "PUUID_ME", "participantId": 1, "teamId": 100, "championName": "LeBlanc",
+        "teamPosition": "MIDDLE", "win": false, "kills": 4, "deaths": 7, "assists": 3,
+        "totalMinionsKilled": 150, "neutralMinionsKilled": 5, "visionScore": 14,
+        "goldEarned": 9000 },
+      { "puuid": "PUUID_ENEMY", "participantId": 6, "teamId": 200, "championName": "Ahri",
+        "teamPosition": "MIDDLE", "win": true, "kills": 9, "deaths": 2, "assists": 6,
+        "totalMinionsKilled": 200, "neutralMinionsKilled": 0, "visionScore": 28,
+        "goldEarned": 13000 }
+    ]
+  }
+}

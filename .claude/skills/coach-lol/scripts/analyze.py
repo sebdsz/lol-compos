@@ -55,3 +55,70 @@ def lane_stats(match, timeline, me):
         "cs_target": cs_target,
         "gold_diff_at": gold_diff,
     }
+
+
+def _zone(x, y):
+    """Zone grossière sur la map (0..15000). Repère pour lire l'overextend, pas une science exacte.
+
+    - moitié de map : la diagonale bot-gauche(0,0) -> top-droite(15000,15000) sépare allié/ennemi.
+    - proche de cette diagonale = axe mid ; sinon = jungle/side.
+    """
+    if x is None or y is None:
+        return "inconnue"
+    side = "ennemi" if (x + y) > 15000 else "allie"
+    place = "mid" if abs(x - y) < 2200 else "jungle"
+    return f"{place}_{side}"
+
+
+def _id_to_champ(match):
+    return {p["participantId"]: p["championName"] for p in match["info"]["participants"]}
+
+
+def _nearest_frame(timeline, ts_ms):
+    best = timeline["info"]["frames"][0]
+    for f in timeline["info"]["frames"]:
+        if abs(f["timestamp"] - ts_ms) < abs(best["timestamp"] - ts_ms):
+            best = f
+    return best
+
+
+def _dist(a, b):
+    return ((a["x"] - b["x"]) ** 2 + (a["y"] - b["y"]) ** 2) ** 0.5
+
+
+def annotate_deaths(match, timeline, me):
+    champ = _id_to_champ(match)
+    my_id = me["participantId"]
+    my_team = me["teamId"]
+    team_of = {p["participantId"]: p["teamId"] for p in match["info"]["participants"]}
+    deaths = []
+    for frame in timeline["info"]["frames"]:
+        for ev in frame.get("events", []):
+            if ev.get("type") != "CHAMPION_KILL" or ev.get("victimId") != my_id:
+                continue
+            ts = ev["timestamp"]
+            pos = ev.get("position", {})
+            near = _nearest_frame(timeline, ts)
+            mf = near["participantFrames"].get(str(my_id), {})
+            allies = enemies = 0
+            for pid_str, pf in near["participantFrames"].items():
+                pid = int(pid_str)
+                if pid == my_id:
+                    continue
+                if _dist(pf["position"], pos) <= 2000:
+                    if team_of[pid] == my_team:
+                        allies += 1
+                    else:
+                        enemies += 1
+            deaths.append({
+                "minute": ts // 60000,
+                "timestamp_ms": ts,
+                "zone": _zone(pos.get("x"), pos.get("y")),
+                "position": pos,
+                "killer": champ.get(ev.get("killerId"), "inconnu"),
+                "assisters": len(ev.get("assistingParticipantIds", [])),
+                "my_gold": mf.get("totalGold"),
+                "allies_nearby": allies,
+                "enemies_nearby": enemies,
+            })
+    return deaths

@@ -1,0 +1,10 @@
+# Secrets — ne jamais commiter
+.env
+.env.*
+!.env.example
+
+# OS / éditeur
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/

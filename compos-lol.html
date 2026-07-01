@@ -266,6 +266,71 @@
     font-family:var(--mono); font-size:11px; line-height:1.8; color:var(--mute); letter-spacing:.01em;
     border-top:1px solid var(--line)}
   footer b{color:var(--ink2)}
+
+  /* ---------- playbook (onglet Plan) ---------- */
+  .seg button[data-cat="plan"].active{background:var(--amber)}
+  .pb{max-width:1000px; margin:0 auto; padding:20px 22px 40px; --ac:var(--amber)}
+  .pb.hidden{display:none}
+  .pb-hero{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:22px 24px; margin-bottom:22px}
+  .pb-hero .pb-kick{font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ac); font-weight:700; margin-bottom:8px}
+  .pb-hero h1{font-size:23px; font-weight:800; letter-spacing:-.02em; margin:0 0 10px; text-transform:uppercase; color:var(--ink)}
+  .pb-hero p{margin:0; color:var(--ink2); font-size:14.5px; line-height:1.6}
+  .pb-thesis{margin-top:16px; padding:12px 16px; border-left:3px solid var(--ac); background:var(--surface2);
+    border-radius:0 8px 8px 0; font-weight:600; color:var(--ink); font-size:14.5px}
+  .pb-note{margin-top:14px; font-family:var(--mono); font-size:11px; line-height:1.7; color:var(--mute); letter-spacing:.01em}
+  .pb-note b{color:var(--amber)}
+
+  .pb-toc{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:28px}
+  .pb-toc a{font-family:var(--mono); font-size:11px; letter-spacing:.03em; color:var(--mute); text-decoration:none;
+    border:1px solid var(--line); border-radius:7px; padding:6px 10px; background:var(--surface); transition:.16s; white-space:nowrap}
+  .pb-toc a:hover{color:var(--ink); border-color:var(--line2); background:var(--raised)}
+  .pb-toc a .tn{color:var(--ac); font-weight:700; margin-right:6px}
+
+  .pb-sec{margin-bottom:32px; scroll-margin-top:82px}
+  .pb-h{display:flex; align-items:baseline; gap:12px; margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--line2)}
+  .pb-h .n{font-family:var(--mono); font-size:12px; font-weight:700; color:var(--ac)}
+  .pb-h .t{font-size:17px; font-weight:800; letter-spacing:-.01em; text-transform:uppercase; color:var(--ink)}
+
+  .pb-card{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:17px 20px; margin-bottom:14px}
+  .pb-card > h3{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--mute2); margin:0 0 11px;
+    display:flex; align-items:center; gap:8px}
+  .pb-card > h3::after{content:""; flex:1; height:1px; background:var(--line)}
+  .pb-card p{margin:0 0 10px; color:var(--ink2); font-size:14px; line-height:1.6}
+  .pb-card p:last-child{margin-bottom:0}
+  .pb-card ul{margin:0; padding-left:19px; color:var(--ink2); font-size:14px; line-height:1.65}
+  .pb-card ul li{margin-bottom:5px}
+  .pb-card ul li:last-child{margin-bottom:0}
+  .pb-card b{color:var(--ink); font-weight:700}
+
+  .pb-rule{border-left:3px solid var(--ac); background:var(--surface2); padding:10px 14px; border-radius:0 8px 8px 0;
+    margin:12px 0; color:var(--ink); font-weight:600; font-size:14px; line-height:1.5}
+  .pb-rule.warn{border-color:var(--early)}
+  .pb-rule.warn b{color:var(--early)}
+
+  .pb-table{width:100%; border-collapse:collapse; font-size:13px; margin:2px 0}
+  .pb-table th{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--mute2);
+    text-align:left; padding:7px 10px; border-bottom:1px solid var(--line2); font-weight:700}
+  .pb-table td{padding:8px 10px; border-bottom:1px solid var(--line); color:var(--ink2); vertical-align:top; line-height:1.5}
+  .pb-table td b{color:var(--ink); font-weight:700}
+  .pb-table tr:last-child td{border-bottom:none}
+  .pb-table .tm{font-family:var(--mono); font-weight:700; color:var(--ink); white-space:nowrap}
+
+  .pb-calls{display:flex; flex-wrap:wrap; gap:8px; margin-top:2px}
+  .pb-call{font-family:var(--mono); font-size:11.5px; letter-spacing:.02em; border:1px solid var(--line2); border-radius:7px;
+    padding:5px 10px; background:var(--surface2); color:var(--ink2)}
+  .pb-call b{color:var(--amber); font-weight:700}
+
+  .pb-check{list-style:none; margin:0; padding:0}
+  .pb-check li{display:flex; align-items:flex-start; gap:10px; padding:7px 0; font-size:13.5px; color:var(--ink2);
+    border-bottom:1px solid var(--line); line-height:1.45}
+  .pb-check li:last-child{border-bottom:none}
+  .pb-check li::before{content:"◻"; color:var(--ac); font-size:15px; line-height:1.2; flex-shrink:0}
+
+  .pb-two{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  @media(max-width:640px){.pb-two{grid-template-columns:1fr}}
+  .pb-mini{font-family:var(--mono); font-size:12.5px; line-height:1.85; color:var(--ink2); white-space:pre-wrap;
+    background:var(--surface2); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:0}
+  .pb-mini b{color:var(--ink)}
 </style>
 </head>
 <body>
@@ -282,6 +347,7 @@
       <button data-cat="mid">Mid</button>
       <button data-cat="scale">Scale</button>
       <button data-cat="team">Équipe</button>
+      <button data-cat="plan">Plan</button>
     </div>
     <div class="search">
       <span class="ic">⌕</span>
@@ -319,6 +385,520 @@
     <div class="modal-body" id="m-body"></div>
   </div>
 </div>
+
+<section class="pb hidden" id="playbook">
+  <div class="pb-hero">
+    <div class="pb-kick">Plan de jeu · Flex 5v5 · low-variance</div>
+    <h1>Le plan : push, arriver avant, forcer le facecheck, engage à 5</h1>
+    <p>Un cadre <b>simple, reproductible et répétable</b> pour gagner un max de games en flex, sans énorme différence mécanique. On ne cherche pas à outplay toutes les lanes — on cherche à contrôler le tempo et les objectifs, et à réduire les coinflips.</p>
+    <div class="pb-thesis">On push les waves, on arrive avant aux objectifs, on pose la vision, on force l'ennemi à facecheck, puis on engage à 5. Calls courts, identiques à chaque game.</div>
+    <p class="pb-note"><b>Note méta :</b> les picks ci-dessous ne sont pas ancrés à un patch précis (contrairement à l'onglet Compos, calé sur le 26.11) — <b>revérifie-les à chaque gros patch</b>. La variante Amumu colle mieux à l'identité « teamfight objectif » que Nocturne (plus pick/global). Les « absolus » (pas de leash, etc.) sont des défauts, pas des lois.</p>
+  </div>
+
+  <nav class="pb-toc">
+    <a href="#p1"><span class="tn">1</span>Identité</a>
+    <a href="#p2"><span class="tn">2</span>Draft &amp; bans</a>
+    <a href="#p3"><span class="tn">3</span>Early &amp; waves</a>
+    <a href="#p4"><span class="tn">4</span>Pathing jungle</a>
+    <a href="#p5"><span class="tn">5</span>Objectifs</a>
+    <a href="#p6"><span class="tn">6</span>Burn / Turn</a>
+    <a href="#p7"><span class="tn">7</span>Dragons</a>
+    <a href="#p8"><span class="tn">8</span>Héraut &amp; Baron</a>
+    <a href="#p9"><span class="tn">9</span>Midgame</a>
+    <a href="#p10"><span class="tn">10</span>Teamfight</a>
+    <a href="#p11"><span class="tn">11</span>Fin de game</a>
+    <a href="#p12"><span class="tn">12</span>Anti-throw</a>
+    <a href="#p13"><span class="tn">13</span>Minute par minute</a>
+    <a href="#p14"><span class="tn">14</span>Shotcalling</a>
+    <a href="#p15"><span class="tn">15</span>Checklists</a>
+    <a href="#p16"><span class="tn">16</span>Résumé Discord</a>
+  </nav>
+
+  <!-- 1 -->
+  <section class="pb-sec" id="p1">
+    <div class="pb-h"><span class="n">01</span><span class="t">Identité de jeu</span></div>
+    <div class="pb-card">
+      <h3>Teamfight objectif + engage facile</h3>
+      <p>Vous ne cherchez pas à gagner toutes les lanes. Vous cherchez à :</p>
+      <ul>
+        <li>survivre aux premières minutes ;</li>
+        <li>obtenir la prio mid + bot (ou mid + top) avant les objectifs ;</li>
+        <li>poser la vision avant l'équipe ennemie ;</li>
+        <li>punir les facechecks ;</li>
+        <li>prendre dragon, Voidgrubs, Héraut ou Baron après un kill ou une position gagnée.</li>
+      </ul>
+      <div class="pb-rule">Quelqu'un engage, Malzahar bloque la cible importante, Jinx tape devant elle, personne ne chase avant que l'objectif soit sécurisé.</div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="pb-sec" id="p2">
+    <div class="pb-h"><span class="n">02</span><span class="t">Draft &amp; bans</span></div>
+    <div class="pb-card">
+      <h3>Composition à spammer</h3>
+      <table class="pb-table">
+        <thead><tr><th>Rôle</th><th>Principal</th><th>Backups simples</th><th>Fonction</th></tr></thead>
+        <tbody>
+          <tr><td class="tm">Top</td><td><b>Malphite</b></td><td>Ornn, Garen, Cho'Gath</td><td>Frontline + engage simple</td></tr>
+          <tr><td class="tm">Jungle</td><td><b>Amumu</b> / Nocturne</td><td>Jarvan IV, Poppy, Sejuani</td><td>Engage, contrôle objectif</td></tr>
+          <tr><td class="tm">Mid</td><td><b>Malzahar</b></td><td>Lissandra, Vex, Annie</td><td>Waveclear + CC fiable</td></tr>
+          <tr><td class="tm">ADC</td><td><b>Jinx</b></td><td>Ashe, Miss Fortune, Seraphine APC</td><td>DPS objectif + teamfight</td></tr>
+          <tr><td class="tm">Support</td><td><b>Leona</b></td><td>Nautilus, Rell, Milio</td><td>Engage + vision + protection</td></tr>
+        </tbody>
+      </table>
+      <div class="pb-rule">Variante encore plus simple : <b>Amumu</b> jungle — s'il touche un bon R, le fight est quasi joué. C'est la ligne qui colle le mieux à l'identité « teamfight objectif ».</div>
+    </div>
+    <div class="pb-card">
+      <h3>Bans prioritaires — vise ce qui casse le plan</h3>
+      <table class="pb-table">
+        <thead><tr><th>Champion</th><th>Pourquoi</th></tr></thead>
+        <tbody>
+          <tr><td class="tm">Morgana</td><td>Black Shield bloque Leona, Nautilus, Malzahar et une grande partie de l'engage.</td></tr>
+          <tr><td class="tm">Janna</td><td>Désengage très fort, casse vos engages et protège les carries.</td></tr>
+          <tr><td class="tm">Poppy</td><td>Bloque les dashs / engages de Nocturne, Leona, Jarvan.</td></tr>
+          <tr><td class="tm">Vayne</td><td>Pénible pour Malphite / Amumu / Ornn et les tanks.</td></tr>
+          <tr><td class="tm">Smolder / Senna / Seraphine</td><td>À adapter selon ce que vous ne voulez pas affronter bot <em>(à revérifier au patch)</em>.</td></tr>
+        </tbody>
+      </table>
+      <ul>
+        <li>Si vous jouez <b>Leona / Nautilus</b> → ban souvent <b>Morgana</b>.</li>
+        <li>Si vous jouez <b>Nocturne / Malphite / Jarvan</b> → ban souvent <b>Janna</b> ou <b>Poppy</b>.</li>
+        <li>Si le top joue tank → pensez à ban <b>Vayne</b>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="pb-sec" id="p3">
+    <div class="pb-h"><span class="n">03</span><span class="t">Early : pas de leash &amp; 3 premières waves</span></div>
+    <div class="pb-card">
+      <h3>Règle n°1 — leashless</h3>
+      <p>Le plan dépend des trois premières waves. Un leash coûte le contrôle de wave 1, le niveau 2, la prio, la possibilité de jouer scuttle / dragon / grubs proprement.</p>
+      <div class="pb-rule">Personne ne leash. Les laners arrivent directement en lane. Le jungler adapte son clear.</div>
+    </div>
+    <div class="pb-card">
+      <h3>Bot — la lane la plus importante</h3>
+      <p><b>Objectif :</b> avoir la prio sans mourir, puis permettre le premier dragon ou un reset propre.</p>
+      <ul>
+        <li><b>Wave 1 :</b> support tape légèrement les 3 mêlées sans se faire poke, ADC last-hit + aide au push. But : <b>être premiers niveau 2</b>.</li>
+        <li><b>Wave 2 :</b> le niveau 2 arrive quand les 3 mêlées de la 2e wave meurent. Support avance, ADC suit. Si l'ennemi ne recule pas → engage immédiat. Si l'ennemi passe niv 2 avant → vous reculez, pas d'ego.</li>
+        <li><b>Wave 3 (cannon) :</b> crash sous tour ennemie, puis ward river/tribush et reset si bien crash.</li>
+      </ul>
+      <div class="pb-rule warn">Erreur classique : crash wave 3, rester sans ward, mourir au jungler ennemi.</div>
+    </div>
+    <div class="pb-two">
+      <div class="pb-card">
+        <h3>Mid — le moteur</h3>
+        <p><b>Ne jamais laisser l'ennemi bouger vers la river avant vous.</b></p>
+        <ul>
+          <li>Garder ses HP, pas de trade inutile, last-hit calme.</li>
+          <li>Sécuriser le niveau 2, ward si gank tôt possible.</li>
+          <li>Dès 2:30, mid ne doit pas être bloqué sous tour si le jungler veut jouer la river. Sinon call <b>« No move mid »</b> → le jungler ne conteste pas.</li>
+        </ul>
+      </div>
+      <div class="pb-card">
+        <h3>Top — weakside intelligent</h3>
+        <p><b>Ne pas mourir avant niveau 6, garder assez de HP pour grubs / TP dragon.</b></p>
+        <ul>
+          <li>Last-hit, pas de trade long, garder ses HP.</li>
+          <li>Si l'ennemi slowpush : tue quelques sbires pour éviter une énorme wave qui dive.</li>
+          <li>Si push gratuit : slowpush wave 1-2 puis crash wave 3.</li>
+        </ul>
+        <p><b>Top ne meurt jamais pour contester une wave.</b> Il sera utile même sans avance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="pb-sec" id="p4">
+    <div class="pb-h"><span class="n">04</span><span class="t">Pathing jungle — choisi au draft</span></div>
+    <div class="pb-two">
+      <div class="pb-card">
+        <h3>Plan A — bot + dragons</h3>
+        <p>Si la botlane est forte / facile (Jinx+Leona, Ashe+Naut, MF+Leona…). Start topside → clear vers bot → jouer bot river.</p>
+        <table class="pb-table">
+          <tbody>
+            <tr><td class="tm">0:55</td><td>Start topside leashless</td></tr>
+            <tr><td class="tm">2:55</td><td>Scuttle bot si mid/bot peuvent bouger</td></tr>
+            <tr><td class="tm">3:15–4:30</td><td>Gank / cover bot ou reset</td></tr>
+            <tr><td class="tm">5:00+</td><td>Dragon seulement si mid + bot ont la prio</td></tr>
+          </tbody>
+        </table>
+        <p><b>Dragon si :</b> bot a push/kill/forcé recall · mid peut bouger · jungler a Smite + HP · support a warded la river. <b>2 conditions manquent → pas de dragon</b> (reset, camps, plates, grubs, vision).</p>
+      </div>
+      <div class="pb-card">
+        <h3>Plan B — top + Voidgrubs</h3>
+        <p>Si bot ne peut pas avoir prio, top/mid peuvent bouger, jungler fort topside, ou botlane ennemie trop dangereuse. Start botside → clear vers top → jouer top river.</p>
+        <table class="pb-table">
+          <tbody>
+            <tr><td class="tm">0:55</td><td>Start botside leashless</td></tr>
+            <tr><td class="tm">2:55</td><td>Scuttle top si mid/top peuvent bouger</td></tr>
+            <tr><td class="tm">5:20</td><td>Jungler topside</td></tr>
+            <tr><td class="tm">5:40</td><td>Mid + top push leurs waves</td></tr>
+            <tr><td class="tm">6:00</td><td>Prendre 1 à 3 Voidgrubs</td></tr>
+          </tbody>
+        </table>
+        <div class="pb-rule">Prendre 1-2 grubs et partir &gt; mourir pour les 3. Ennemi installé à 4 → give, joue dragon / plates bot / camps.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="pb-sec" id="p5">
+    <div class="pb-h"><span class="n">05</span><span class="t">Règle d'or des objectifs</span></div>
+    <div class="pb-card">
+      <h3>Un objectif se joue avant son spawn</h3>
+      <table class="pb-table">
+        <thead><tr><th>Timing</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td class="tm">T − 90 s</td><td>Ceux qui ont de l'or reset.</td></tr>
+          <tr><td class="tm">T − 75 s</td><td>Support + jungle sortent avec Oracle / pinks.</td></tr>
+          <tr><td class="tm">T − 60 s</td><td>Mid push sa wave. La side proche de l'objectif push aussi.</td></tr>
+          <tr><td class="tm">T − 45 s</td><td>Vous posez la vision.</td></tr>
+          <tr><td class="tm">T − 30 s</td><td>Vous contrôlez les entrées.</td></tr>
+          <tr><td class="tm">T − 15 s</td><td>Vous ne tapez pas si l'ennemi peut entrer gratis. Vous cherchez le facecheck.</td></tr>
+        </tbody>
+      </table>
+      <div class="pb-rule">Pas de wave push = pas d'objectif.</div>
+      <h3>Waves à push avant</h3>
+      <table class="pb-table">
+        <tbody>
+          <tr><td class="tm">Dragon</td><td>Mid + bot</td></tr>
+          <tr><td class="tm">Voidgrubs</td><td>Mid + top</td></tr>
+          <tr><td class="tm">Héraut</td><td>Mid + top</td></tr>
+          <tr><td class="tm">Baron</td><td>Mid + top, ou mid + side proche</td></tr>
+          <tr><td class="tm">Elder</td><td>Mid obligatoire, puis group à 5</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="pb-sec" id="p6">
+    <div class="pb-h"><span class="n">06</span><span class="t">Pull, Burn ou Turn</span></div>
+    <div class="pb-card">
+      <h3>Quand vous commencez l'objectif</h3>
+      <p>Ne le laissez pas au fond du pit : <b>pull légèrement vers votre côté</b> (sans reset) pour forcer l'ennemi à avancer dans Leona / Nautilus / Malphite / Malzahar.</p>
+      <table class="pb-table">
+        <thead><tr><th>Situation</th><th>Call</th></tr></thead>
+        <tbody>
+          <tr><td>Jungler ennemi mort ou vu loin</td><td><b>Burn</b></td></tr>
+          <tr><td>Jungler ennemi vivant et proche</td><td>Préparer <b>Turn</b> à 3-4k HP</td></tr>
+          <tr><td>Support ou jungler allié mort</td><td>Ne pas commencer</td></tr>
+          <tr><td>Ennemi entre en désordre</td><td><b>Turn</b></td></tr>
+          <tr><td>Ennemi arrive trop tard</td><td><b>Burn</b></td></tr>
+        </tbody>
+      </table>
+      <div class="pb-rule warn">Burn = tout le monde tape l'objectif. Turn = tout le monde arrête et engage. <b>Jamais moitié burn, moitié turn.</b></div>
+    </div>
+    <div class="pb-card">
+      <h3>Quand l'ennemi commence l'objectif</h3>
+      <p>On ne rentre jamais un par un dans le noir. On conteste seulement si : mid/bot wave push · l'engage principal a R ou Flash · le jungler peut entrer au Smite · l'ennemi tanke déjà l'objectif.</p>
+      <div class="pb-rule">Laissez-les commencer, puis entrez quand ils sont coincés et low HP (dragon ~4-5k). Sinon : <b>give &amp; cross-map</b> (grubs, héraut, T1, camps, vision, 2 waves).</div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="pb-sec" id="p7">
+    <div class="pb-h"><span class="n">07</span><span class="t">Plan précis des dragons</span></div>
+    <div class="pb-card">
+      <h3>1er dragon — ne forcez pas</h3>
+      <p>Seulement si bot a prio, mid a prio, jungle a HP + Smite, support contrôle la vision. Sinon vous le donnez.</p>
+      <div class="pb-rule">Votre comp teamfight scale très bien. Mourir à 5:30 pour un 1er dragon est bien plus grave que donner le dragon.</div>
+    </div>
+    <div class="pb-card">
+      <h3>2e dragon — vous jouez sérieusement</h3>
+      <table class="pb-table">
+        <tbody>
+          <tr><td class="tm">T − 90</td><td>Reset obligatoire si vous avez de l'or</td></tr>
+          <tr><td class="tm">T − 60</td><td>Bot push puis vient river</td></tr>
+          <tr><td class="tm">T − 45</td><td>Support + jungle contrôlent la vision</td></tr>
+          <tr><td class="tm">T − 30</td><td>Malzahar, Malphite, Leona/Naut jouent dans le brouillard</td></tr>
+          <tr><td class="tm">Spawn</td><td>Facecheck ennemi → kill puis dragon ; sinon dragon gratuit</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pb-two">
+      <div class="pb-card">
+        <h3>3e dragon (soul point)</h3>
+        <p><b>Si vous avez déjà 2 dragons :</b> setup très tôt, forcez l'ennemi à facecheck une zone déjà contrôlée.</p>
+        <p><b>Si l'ennemi a déjà 2 dragons :</b> arrivez au moins 60 s avant. En retard, sans vision et sans ultis → give &amp; cross-map, préparez le dragon suivant ou le Baron. <b>Pas de 4v5 sans ulti.</b></p>
+      </div>
+      <div class="pb-card">
+        <h3>Soul &amp; Elder</h3>
+        <p><b>Tout le monde arrête de jouer solo.</b></p>
+        <ul>
+          <li>Pas de side sans TP · pas de camp à 20 s de l'objectif · pas de recall tardif.</li>
+          <li>Pas de ward posée par l'ADC seul · support + jungle avancent ensemble · carries derrière.</li>
+          <li>Malzahar garde son R pour la cible clé ou pour protéger Jinx.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="pb-sec" id="p8">
+    <div class="pb-h"><span class="n">08</span><span class="t">Héraut &amp; Baron</span></div>
+    <div class="pb-two">
+      <div class="pb-card">
+        <h3>Héraut → casser T1 mid</h3>
+        <p>Le Héraut ne se prend pas juste pour le prendre. Il doit casser une tour, idéalement <b>T1 mid</b>.</p>
+        <ul>
+          <li>1. Prendre Héraut. 2. Push mid. 3. Poser Héraut si T1 mid tombe. 4. Invade avec support + jungle.</li>
+        </ul>
+        <p>T1 mid tombée = vision ennemie plus dure, dragons plus simples, ennemi doit facecheck plus loin, votre engage devient plus fort.</p>
+      </div>
+      <div class="pb-card">
+        <h3>Baron (20:00+) — pas un casino</h3>
+        <p><b>Vous faites Baron si :</b> jungler ennemi mort · ou 2 ennemis morts · ou mid+top push avec vision complète · ou bait car votre engage est fort.</p>
+        <p><b>Vous ne faites pas Baron si :</b> jungler ennemi vivant &amp; invisible · lanes sous vos tours · ADC absent · support sans wards · plus d'ultis engage · équipe low · personne pour zoner l'entrée.</p>
+      </div>
+    </div>
+    <div class="pb-card">
+      <h3>Calls Baron</h3>
+      <table class="pb-table">
+        <tbody>
+          <tr><td>Ennemi loin</td><td><b>Burn</b></td></tr>
+          <tr><td>Ennemi entre river</td><td><b>Turn</b></td></tr>
+          <tr><td>Jungler ennemi approche</td><td>Stop DPS, kill/zone le jungler, puis finish</td></tr>
+          <tr><td>Votre ADC est zoné</td><td>Stop Baron</td></tr>
+          <tr><td>Votre jungler low HP</td><td>Stop Baron ou reset fight</td></tr>
+        </tbody>
+      </table>
+      <div class="pb-rule warn">Pas de Baron coinflip.</div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="pb-sec" id="p9">
+    <div class="pb-h"><span class="n">09</span><span class="t">Midgame &amp; regroupement</span></div>
+    <div class="pb-two">
+      <div class="pb-card">
+        <h3>Structure 4-1 (après T1 bot)</h3>
+        <ul>
+          <li><b>ADC + Support</b> mid (centre de map, protégé).</li>
+          <li>Midlaner en side lane safe.</li>
+          <li>Toplaner side opposée ou proche objectif avec TP.</li>
+          <li>Jungler autour de mid/support.</li>
+        </ul>
+        <div class="pb-rule warn">Erreur : Jinx qui farm bot seule à 17:00 pendant qu'un dragon spawn.</div>
+        <p>Le 4-1 est plus simple et stable que le 1-3-1 si vous n'êtes pas très coordonnés.</p>
+      </div>
+      <div class="pb-card">
+        <h3>Quand se regrouper ?</h3>
+        <table class="pb-table">
+          <tbody>
+            <tr><td class="tm">&gt; 1:30</td><td>Chacun prend ses waves</td></tr>
+            <tr><td class="tm">1:30</td><td>Reset + achat wards</td></tr>
+            <tr><td class="tm">1:00</td><td>Mid + side proche push</td></tr>
+            <tr><td class="tm">0:45</td><td>Support + jungle posent vision</td></tr>
+            <tr><td class="tm">0:30</td><td>Carries rejoignent</td></tr>
+            <tr><td class="tm">Spawn</td><td>Vous êtes déjà là</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="pb-sec" id="p10">
+    <div class="pb-h"><span class="n">10</span><span class="t">Teamfight — script ultra simple</span></div>
+    <div class="pb-card">
+      <h3>Avant le fight</h3>
+      <ul>
+        <li><b>Malzahar</b> garde R pour le carry ennemi, le jungler autour d'un objectif, ou l'assassin qui dive Jinx.</li>
+        <li><b>Malphite</b> ne R pas le tank sauf si ça garantit un objectif.</li>
+        <li><b>Leona/Nautilus</b> ne flash engage pas si Jinx est trop loin.</li>
+        <li><b>Nocturne</b> ne R pas seul si personne ne peut suivre.</li>
+        <li><b>Jinx</b> tape devant elle, ne flash pas en avant sauf fight gagné. <b>Support</b> protège Jinx après l'engage.</li>
+      </ul>
+    </div>
+    <div class="pb-card">
+      <h3>Priorité de cible &amp; combos</h3>
+      <ul>
+        <li>1. Jungler ennemi si objectif à Smite · 2. ADC/mid si accessible · 3. Support fragile qui facecheck · 4. Frontline en dernier recours.</li>
+      </ul>
+      <div class="pb-calls">
+        <span class="pb-call">Nocturne : <b>R → Malphite/Leona R → Malzahar R → Jinx free hit</b></span>
+        <span class="pb-call">Amumu : <b>Leona engage → Amumu Q/R → Malphite R backline → Malzahar R carry → Jinx</b></span>
+        <span class="pb-call">Sans risque : <b>facecheck ennemi → CC → Malzahar R → Jinx → objectif</b></span>
+      </div>
+    </div>
+    <div class="pb-two">
+      <div class="pb-card">
+        <h3>Pendant</h3>
+        <ul>
+          <li>Jinx tape la cible la plus proche, Malzahar la protège si assassin.</li>
+          <li>Support entre Jinx et l'ennemi. Top/jungle bloquent l'accès à Jinx.</li>
+          <li>Personne ne chase avant que le fight soit gagné, personne ne quitte l'objectif pour un support low.</li>
+        </ul>
+      </div>
+      <div class="pb-card">
+        <h3>Après (fight gagné)</h3>
+        <p><b>Objectif d'abord, chase ensuite seulement si sécurisé.</b></p>
+        <p>Ordre : Nexus &gt; Elder &gt; Baron &gt; Soul/dragon &gt; Inhibiteur &gt; T2/T1 &gt; camps &gt; waves.</p>
+        <div class="pb-rule warn">Erreur : chase jusqu'à T2, donner shutdown, perdre Baron.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section class="pb-sec" id="p11">
+    <div class="pb-h"><span class="n">11</span><span class="t">Comment finir les games</span></div>
+    <div class="pb-two">
+      <div class="pb-card">
+        <h3>Séquence de fin</h3>
+        <ul>
+          <li>1. T1 mid · 2. Stack dragons · 3. Baron après un pick / setup vision · 4. Siege 2 lanes · 5. Inhibiteur · 6. Reset · 7. Rejouer Baron/Elder ou finir aux waves.</li>
+        </ul>
+        <p>Avec Baron : <b>3 mid + 2 side</b> ou <b>4 mid + Malphite side TP</b>. Objectif : crash deux waves en même temps → l'ennemi doit se séparer.</p>
+      </div>
+      <div class="pb-card">
+        <h3>Après un inhibiteur</h3>
+        <p>Full HP + plusieurs ennemis morts → <b>finissez</b>.</p>
+        <p>Ennemis respawn bientôt → reculez, prenez jungle, reset, jouez l'autre côté.</p>
+        <div class="pb-rule warn">Ne donnez jamais 1000 gold de shutdown pour un Nexus greedy.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section class="pb-sec" id="p12">
+    <div class="pb-h"><span class="n">12</span><span class="t">Règles anti-throw</span></div>
+    <div class="pb-card">
+      <h3>À coller dans le Discord</h3>
+      <ol style="margin:0; padding-left:19px; color:var(--ink2); font-size:14px; line-height:1.7;">
+        <li>Pas d'objectif sans prio mid.</li>
+        <li>Pas de dragon si bot est mort ou sous tour.</li>
+        <li>Pas de Baron avec jungler ennemi vivant dans le brouillard.</li>
+        <li>Ennemi pendant objectif : soit burn, soit turn, jamais les deux.</li>
+        <li>Après 14 min : ADC + support mid.</li>
+        <li>À T − 90 d'un gros objectif, ceux qui ont de l'or reset.</li>
+        <li>Le support ne ward jamais seul. Jungle + support ensemble.</li>
+        <li>Le carry ne facecheck jamais. Même pour une ward.</li>
+        <li>Tour ou inhibiteur pris → reset.</li>
+        <li>Fight perdu → donnez l'objectif suivant, prenez les waves.</li>
+      </ol>
+      <div class="pb-rule">La plus importante : <b>savoir dire « give »</b>. Une bonne équipe donne un dragon, prend deux waves + une tour + un camp, puis rejoue le prochain timing.</div>
+    </div>
+  </section>
+
+  <!-- 13 -->
+  <section class="pb-sec" id="p13">
+    <div class="pb-h"><span class="n">13</span><span class="t">Plan minute par minute</span></div>
+    <div class="pb-card">
+      <table class="pb-table">
+        <tbody>
+          <tr><td class="tm">0:00 – 3:00</td><td>Setup lanes, pas de leash, pas d'invade coinflip. Lanes jouent les 3 waves proprement, jungler clear vers le côté prévu. <b>Call clair : « Je path bot » / « Je path top »</b>.</td></tr>
+          <tr><td class="tm">3:00 – 5:30</td><td>Convertir la prio en tempo : bot crash/reset, mid push avant river, support ward river puis revient. Bot+mid prio → prépare dragon ; top+mid prio → prépare grubs ; aucune prio → ne force rien.</td></tr>
+          <tr><td class="tm">5:30 – 8:00</td><td>1er choix macro : dragon (bot/mid) · grubs (top/mid) · camps+reset+waves (aucune prio). <b>Sortir de l'early sans donner 3 kills = déjà une victoire.</b></td></tr>
+          <tr><td class="tm">8:00 – 14:00</td><td>Casser T1 bot ou mid. Grubs → plates/tours ; dragon → 2e dragon. Support roam après crash bot, jamais pendant qu'une grosse wave arrive sur l'ADC. <b>T1 mid avant 14-16 min</b> (ambitieux).</td></tr>
+          <tr><td class="tm">14:00 – 20:00</td><td>Structure midgame : ADC+support mid, mid side safe, top side opposée/TP, jungle autour mid. Héraut si ça casse mid, dragon avec setup T−90.</td></tr>
+          <tr><td class="tm">20:00+</td><td>Baron / Elder / fin. Jamais Baron au hasard : mid prio → vision → pick/bait → fight gagné → Baron → siege 2 lanes → inhib → reset. Elder bientôt → personne ne split sans TP.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 14 -->
+  <section class="pb-sec" id="p14">
+    <div class="pb-h"><span class="n">14</span><span class="t">Shotcalling minimal</span></div>
+    <div class="pb-card">
+      <h3>Un seul caller (jungler ou support) · calls courts</h3>
+      <div class="pb-calls">
+        <span class="pb-call"><b>Push mid</b> — tout le monde aide la prio mid</span>
+        <span class="pb-call"><b>Reset</b> — recall maintenant, pas dans 20 s</span>
+        <span class="pb-call"><b>Setup drake</b> — vision + waves autour du dragon</span>
+        <span class="pb-call"><b>Setup Nash</b> — vision + waves autour du Baron</span>
+        <span class="pb-call"><b>Turn</b> — on arrête l'objectif et on engage</span>
+        <span class="pb-call"><b>Burn</b> — tout le monde tape l'objectif</span>
+        <span class="pb-call"><b>Give</b> — on abandonne, on ne meurt pas pour rien</span>
+        <span class="pb-call"><b>Cross-map</b> — on prend ailleurs</span>
+        <span class="pb-call"><b>No move mid</b> — mid bloqué, jungle ne conteste pas</span>
+        <span class="pb-call"><b>No flash ADC</b> — l'ADC garde son flash</span>
+        <span class="pb-call"><b>Play slow</b> — on attend wave/vision/cooldowns</span>
+        <span class="pb-call"><b>Jungler dead</b> — fenêtre d'objectif</span>
+        <span class="pb-call"><b>Back</b> — on recule immédiatement</span>
+      </div>
+      <div class="pb-rule">Moins vous parlez, mieux vous jouez.</div>
+    </div>
+  </section>
+
+  <!-- 15 -->
+  <section class="pb-sec" id="p15">
+    <div class="pb-h"><span class="n">15</span><span class="t">Checklists avant objectif</span></div>
+    <div class="pb-two">
+      <div class="pb-card">
+        <h3>Objectif (dragon / grubs / héraut / baron / elder)</h3>
+        <ul class="pb-check">
+          <li>Mid wave push ?</li>
+          <li>Side proche push ?</li>
+          <li>Jungler vivant avec Smite ?</li>
+          <li>Support a wards / Oracle ?</li>
+          <li>Carry principal présent ?</li>
+          <li>Ultis importants dispo ?</li>
+          <li>Ennemi important mort ou loin ?</li>
+          <li>Call clair : burn, turn ou give ?</li>
+        </ul>
+        <div class="pb-rule warn">Moins de 5 cases cochées → ne forcez pas.</div>
+      </div>
+      <div class="pb-card">
+        <h3>Spéciale Baron</h3>
+        <ul class="pb-check">
+          <li>Jungler ennemi mort ou visible loin ?</li>
+          <li>Mid wave push ?</li>
+          <li>Top ou side proche push ?</li>
+          <li>ADC présent et peut taper ?</li>
+          <li>Support a vision ?</li>
+          <li>Malphite / Leona / Nocturne / Amumu ont ulti ?</li>
+          <li>Call burn ou turn décidé ?</li>
+        </ul>
+        <div class="pb-rule warn">Jungler ennemi vivant &amp; invisible → pas de Baron coinflip.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 -->
+  <section class="pb-sec" id="p16">
+    <div class="pb-h"><span class="n">16</span><span class="t">Résumé — version Discord</span></div>
+    <div class="pb-card">
+      <h3>À copier-coller</h3>
+<pre class="pb-mini"><b>PLAN FLEX 5C5</b>
+
+Comp : Malphite / Amumu ou Nocturne / Malzahar / Jinx / Leona.
+
+Early :
+- Pas de leash.
+- Bot joue level 2 et crash wave 3.
+- Mid garde prio river.
+- Top survit, garde HP, joue utile niveau 6.
+
+Objectifs :
+- Pas de wave push = pas d'objectif.
+- Drake = push mid + bot.
+- Grubs/Héraut/Baron = push mid + top.
+- Reset T−90. Vision T−45. Group T−30.
+
+Calls :
+- Burn = on tape objectif.
+- Turn = on arrête et on fight.
+- Give = on donne et on prend cross-map.
+- Jamais moitié burn / moitié turn.
+
+Midgame :
+- Après 14 min : ADC + support mid.
+- Support ne ward jamais seul.
+- Carry ne facecheck jamais.
+
+Baron :
+- Jamais si jungler ennemi vivant dans le brouillard.
+- Ennemi arrive : turn. Ennemi loin : burn.
+
+Fin :
+- Baron → 2 lanes → inhib → reset → Elder/Baron → finish.</pre>
+    </div>
+  </section>
+</section>
 
 <footer>
   Picks ancrés sur le <b>patch 26.11</b> (méta juin 2026) — hypercarries de retour, supports d'engage en hausse.<br>
@@ -756,7 +1336,18 @@ function highlight(text, q){
   return out;
 }
 
+const playbook = document.getElementById("playbook");
+const stripEl = document.querySelector(".strip");
+const searchEl = document.querySelector(".search");
+
 function apply(){
+  const isPlan = activeCat === "plan";
+  playbook.classList.toggle("hidden", !isPlan);
+  stripEl.classList.toggle("hidden", isPlan);
+  grid.classList.toggle("hidden", isPlan);
+  searchEl.classList.toggle("hidden", isPlan);
+  if(isPlan){ window.scrollTo(0,0); return; }
+
   const q = norm(query.trim());
   let shown = 0;
   cards.forEach(card => {

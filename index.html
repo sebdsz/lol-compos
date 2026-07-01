@@ -280,11 +280,43 @@
   .pb-note{margin-top:14px; font-family:var(--mono); font-size:11px; line-height:1.7; color:var(--mute); letter-spacing:.01em}
   .pb-note b{color:var(--amber)}
 
-  .pb-toc{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:28px}
-  .pb-toc a{font-family:var(--mono); font-size:11px; letter-spacing:.03em; color:var(--mute); text-decoration:none;
-    border:1px solid var(--line); border-radius:7px; padding:6px 10px; background:var(--surface); transition:.16s; white-space:nowrap}
-  .pb-toc a:hover{color:var(--ink); border-color:var(--line2); background:var(--raised)}
-  .pb-toc a .tn{color:var(--ac); font-weight:700; margin-right:6px}
+  /* layout : sommaire latéral + contenu */
+  .pb-layout{display:grid; grid-template-columns:212px 1fr; gap:30px; align-items:start}
+  @media(max-width:860px){.pb-layout{grid-template-columns:1fr; gap:16px}}
+  .pb-main{min-width:0}
+  .pb-side{position:sticky; top:74px; align-self:start; max-height:calc(100vh - 90px); overflow-y:auto; padding-right:2px}
+  @media(max-width:860px){.pb-side{position:static; max-height:none; overflow:visible}}
+
+  .pb-roles{display:flex; flex-direction:column; gap:5px; margin-bottom:16px}
+  @media(max-width:860px){.pb-roles{flex-direction:row; flex-wrap:wrap; margin-bottom:6px}}
+  .pb-role-btn{font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; text-transform:uppercase; font-weight:600;
+    text-align:left; cursor:pointer; color:var(--mute); background:var(--surface); border:1px solid var(--line);
+    border-radius:8px; padding:8px 11px; transition:.16s; display:flex; align-items:center; gap:9px}
+  .pb-role-btn:hover{color:var(--ink); border-color:var(--line2); background:var(--raised)}
+  .pb-role-btn.active{color:#fff; background:var(--amber); border-color:var(--amber)}
+  .pb-role-btn .rc{width:7px; height:7px; border-radius:50%; background:var(--mute2); flex-shrink:0}
+  .pb-role-btn.active .rc{background:#fff}
+
+  .pb-navlabel{font-family:var(--mono); font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--mute2);
+    margin:0 0 7px 2px}
+  @media(max-width:860px){.pb-navlabel{display:none}}
+  .pb-nav{display:flex; flex-direction:column; gap:1px; border-left:1px solid var(--line)}
+  @media(max-width:860px){.pb-nav{flex-direction:row; flex-wrap:wrap; border-left:none; gap:5px}}
+  .pb-nav a{font-family:var(--mono); font-size:11px; letter-spacing:.01em; color:var(--mute); text-decoration:none;
+    padding:5px 10px; border-left:2px solid transparent; margin-left:-1px; transition:.14s; line-height:1.3}
+  @media(max-width:860px){.pb-nav a{border:1px solid var(--line); border-radius:6px; margin-left:0; padding:5px 9px}}
+  .pb-nav a:hover{color:var(--ink)}
+  .pb-nav a.active{color:var(--amber); border-left-color:var(--amber); font-weight:700; background:var(--surface2)}
+  @media(max-width:860px){.pb-nav a.active{border-color:var(--amber)}}
+  .pb-nav a .ni{color:var(--mute2); margin-right:8px; font-weight:700}
+  .pb-nav a.active .ni{color:var(--amber)}
+
+  .pb-roleview.hidden,.pb-general.hidden{display:none}
+  .pb-rolehead{background:var(--surface); border:1px solid var(--line2); border-left:3px solid var(--amber);
+    border-radius:10px; padding:13px 16px; margin-bottom:16px}
+  .pb-rolehead .rl{font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--amber); font-weight:700}
+  .pb-rolehead .rt{font-size:15px; font-weight:800; color:var(--ink); margin-top:3px; letter-spacing:-.01em}
+  .pb-rolehead .rt span{color:var(--mute); font-weight:600; font-size:13px}
 
   .pb-sec{margin-bottom:32px; scroll-margin-top:82px}
   .pb-h{display:flex; align-items:baseline; gap:12px; margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--line2)}
@@ -395,24 +427,21 @@
     <p class="pb-note"><b>Note méta :</b> les picks ci-dessous ne sont pas ancrés à un patch précis (contrairement à l'onglet Compos, calé sur le 26.11) — <b>revérifie-les à chaque gros patch</b>. La variante Amumu colle mieux à l'identité « teamfight objectif » que Nocturne (plus pick/global). Les « absolus » (pas de leash, etc.) sont des défauts, pas des lois.</p>
   </div>
 
-  <nav class="pb-toc">
-    <a href="#p1"><span class="tn">1</span>Identité</a>
-    <a href="#p2"><span class="tn">2</span>Draft &amp; bans</a>
-    <a href="#p3"><span class="tn">3</span>Early &amp; waves</a>
-    <a href="#p4"><span class="tn">4</span>Pathing jungle</a>
-    <a href="#p5"><span class="tn">5</span>Objectifs</a>
-    <a href="#p6"><span class="tn">6</span>Burn / Turn</a>
-    <a href="#p7"><span class="tn">7</span>Dragons</a>
-    <a href="#p8"><span class="tn">8</span>Héraut &amp; Baron</a>
-    <a href="#p9"><span class="tn">9</span>Midgame</a>
-    <a href="#p10"><span class="tn">10</span>Teamfight</a>
-    <a href="#p11"><span class="tn">11</span>Fin de game</a>
-    <a href="#p12"><span class="tn">12</span>Anti-throw</a>
-    <a href="#p13"><span class="tn">13</span>Minute par minute</a>
-    <a href="#p14"><span class="tn">14</span>Shotcalling</a>
-    <a href="#p15"><span class="tn">15</span>Checklists</a>
-    <a href="#p16"><span class="tn">16</span>Résumé Discord</a>
-  </nav>
+  <div class="pb-layout">
+    <aside class="pb-side">
+      <div class="pb-roles">
+        <button class="pb-role-btn active" data-role="all"><span class="rc"></span>Vue globale</button>
+        <button class="pb-role-btn" data-role="top"><span class="rc"></span>Top</button>
+        <button class="pb-role-btn" data-role="jungle"><span class="rc"></span>Jungle</button>
+        <button class="pb-role-btn" data-role="mid"><span class="rc"></span>Mid</button>
+        <button class="pb-role-btn" data-role="adc"><span class="rc"></span>ADC</button>
+        <button class="pb-role-btn" data-role="supp"><span class="rc"></span>Support</button>
+      </div>
+      <div class="pb-navlabel">Sommaire</div>
+      <nav class="pb-nav" id="pb-nav"></nav>
+    </aside>
+    <div class="pb-main">
+      <div class="pb-general" id="pb-general">
 
   <!-- 1 -->
   <section class="pb-sec" id="p1">
@@ -898,6 +927,227 @@ Fin :
 - Baron → 2 lanes → inhib → reset → Elder/Baron → finish.</pre>
     </div>
   </section>
+      </div><!-- /pb-general -->
+
+      <!-- ===== VUES PAR RÔLE ===== -->
+      <div class="pb-roleview hidden" data-role="top">
+        <div class="pb-rolehead"><div class="rl">Top · Baston 2 rue</div><div class="rt">Frontline + engage <span>· Malphite / Ornn / Garen / Cho'Gath</span></div></div>
+        <section class="pb-sec" id="r-top-1">
+          <div class="pb-h"><span class="n">TOP</span><span class="t">Ton pick &amp; ton job</span></div>
+          <div class="pb-card">
+            <p><b>Malphite</b> · backups Ornn, Garen, Cho'Gath. Tu es <b>frontline + engage simple</b>, first-pickable (tu ne te contres pas vraiment).</p>
+            <div class="pb-rule">Tu n'as pas à gagner ta lane. Tu dois être <b>utile aux fights</b> et garantir un objectif avec ton R.</div>
+          </div>
+        </section>
+        <section class="pb-sec" id="r-top-2">
+          <div class="pb-h"><span class="n">TOP</span><span class="t">Early — tes waves</span></div>
+          <div class="pb-card">
+            <h3>Weakside intelligent</h3>
+            <ul>
+              <li><b>Wave 1 :</b> last-hit, pas de trade long, garde tes HP.</li>
+              <li><b>Ennemi slowpush :</b> tue quelques sbires pour réduire la wave et éviter un dive.</li>
+              <li><b>Push gratuit :</b> slowpush wave 1-2 puis crash wave 3, reset ou ward river.</li>
+              <li><b>Tu subis :</b> farm sous tour, garde tes HP.</li>
+            </ul>
+            <div class="pb-rule warn">Objectif n°1 : <b>ne pas mourir avant niveau 6</b>, garder assez de HP pour les grubs ou un TP dragon.</div>
+          </div>
+        </section>
+        <section class="pb-sec" id="r-top-3">
+          <div class="pb-h"><span class="n">TOP</span><span class="t">Objectifs &amp; midgame</span></div>
+          <div class="pb-card">
+            <ul>
+              <li>Grubs / Héraut = <b>mid + top push</b> : c'est toi qui push la side pour libérer le setup.</li>
+              <li>Garde ton <b>TP</b> pour rejoindre un dragon ou un fight d'objectif.</li>
+              <li>En structure 4-1, tu es souvent le <b>« 1 » en side</b> (opposée ou proche de l'objectif), tanky + TP.</li>
+            </ul>
+          </div>
+        </section>
+        <section class="pb-sec" id="r-top-4">
+          <div class="pb-h"><span class="n">TOP</span><span class="t">Teamfight &amp; tes interdits</span></div>
+          <div class="pb-card">
+            <ul>
+              <li><b>Malphite</b> : ne R pas le tank — garde ton R pour la <b>backline groupée</b> ou pour garantir l'objectif.</li>
+              <li>Empêche l'accès à Jinx, bloque les dives.</li>
+              <li>Ne chase pas avant que le fight soit gagné.</li>
+            </ul>
+            <div class="pb-rule warn">Ne meurs <b>jamais</b> pour contester une wave. Tu es utile même sans avance.</div>
+          </div>
+        </section>
+      </div>
+
+      <div class="pb-roleview hidden" data-role="jungle">
+        <div class="pb-rolehead"><div class="rl">Jungle · Coup Du Destin</div><div class="rt">Engage + contrôle d'objectif <span>· Amumu / Nocturne / Jarvan / Poppy / Sejuani</span></div></div>
+        <section class="pb-sec" id="r-jgl-1">
+          <div class="pb-h"><span class="n">JGL</span><span class="t">Ton pick &amp; ton job</span></div>
+          <div class="pb-card">
+            <p><b>Amumu</b> (colle le mieux à l'identité) ou Nocturne · backups Jarvan IV, Poppy, Sejuani. Rôle : <b>engage + contrôle d'objectif</b>.</p>
+            <div class="pb-rule">Tu <b>choisis le plan au draft</b> et tu l'annonces : « Je path bot » ou « Je path top ». Tout le monde doit savoir de quel côté tu joues.</div>
+          </div>
+        </section>
+        <section class="pb-sec" id="r-jgl-2">
+          <div class="pb-h"><span class="n">JGL</span><span class="t">Early — ton clear</span></div>
+          <div class="pb-card">
+            <h3>Leashless, côté prévu</h3>
+            <table class="pb-table"><tbody>
+              <tr><td class="tm">0:55</td><td>Start côté prévu (Plan A bot / Plan B top), leashless.</td></tr>
+              <tr><td class="tm">2:55</td><td>Scuttle du côté joué si mid/lane peuvent bouger.</td></tr>
+              <tr><td class="tm">3:15–4:30</td><td>Gank / cover, ou reset.</td></tr>
+            </tbody></table>
+            <div class="pb-rule warn">Évite les fights sans prio. Garde <b>HP + Smite</b> pour l'objectif. Si « No move mid » → tu ne contestes pas scuttle/river.</div>
+          </div>
+        </section>
+        <section class="pb-sec" id="r-jgl-3">
+          <div class="pb-h"><span class="n">JGL</span><span class="t">Objectifs — c'est toi le décideur</span></div>
+          <div class="pb-card">
+            <h3>Conditions dragon (Plan A)</h3>
+            <ul>
+              <li>Bot a push / kill / forcé recall · mid peut bouger · tu as Smite + HP · support a warded la river.</li>
+              <li><b>2 conditions manquent → pas de dragon</b> : reset, camps, plates, grubs, vision.</li>
+            </ul>
+            <div class="pb-rule">Setup avec le support (vision T−45), pull l'objectif vers ton côté, puis tranche : <b>burn</b> ou <b>turn</b> — jamais les deux.</div>
+          </div>
+        </section>
+        <section class="pb-sec" id="r-jgl-4">
+          <div class="pb-h"><span class="n">JGL</span><span class="t">Teamfight &amp; tes interdits</span></div>
+          <div class="pb-card">
+            <ul>
+              <li><b>Amumu</b> : Q/R sur le regroupement → si le R touche, le fight est quasi joué.</li>
+              <li><b>Nocturne</b> : ne R pas seul si personne ne peut suivre.</li>
+              <li>Cible prioritaire : le <b>jungler ennemi</b> quand un objectif est à Smite.</li>
+            </ul>
+            <div class="pb-rule warn">Jamais de <b>Baron coinflip</b> : si le jungler ennemi est vivant et invisible, tu ne lances pas.</div>
+          </div>
+        </section>
+      </div>
+
+      <div class="pb-roleview hidden" data-role="mid">
+        <div class="pb-rolehead"><div class="rl">Mid · Niir</div><div class="rt">Waveclear + CC — le moteur <span>· Malzahar / Lissandra / Vex / Annie</span></div></div>
+        <section class="pb-sec" id="r-mid-1">
+          <div class="pb-h"><span class="n">MID</span><span class="t">Ton pick &amp; ton job</span></div>
+          <div class="pb-card">
+            <p><b>Malzahar</b> · backups Lissandra, Vex, Annie. Rôle : <b>waveclear + CC fiable</b>. Tu es <b>le moteur du plan</b>.</p>
+            <div class="pb-rule">Tu ne cherches pas forcément à tuer. Tu contrôles la wave et tu gardes la <b>prio river</b>.</div>
+          </div>
+        </section>
+        <section class="pb-sec" id="r-mid-2">
+          <div class="pb-h"><span class="n">MID</span><span class="t">Early — garde la prio</span></div>
+          <div class="pb-card">
+            <ul>
+              <li>Garde tes HP, pas de trade inutile, last-hit calme.</li>
+              <li>Sécurise le niveau 2, ward si un gank tôt est possible.</li>
+              <li>Dès <b>2:30</b> : ne sois pas bloqué sous tour si le jungler veut la river. Sinon annonce <b>« No move mid »</b>.</li>
+            </ul>
+            <div class="pb-rule">Ne laisse <b>jamais</b> l'ennemi bouger vers la river avant toi.</div>
+          </div>
+        </section>
+        <section class="pb-sec" id="r-mid-3">
+          <div class="pb-h"><span class="n">MID</span><span class="t">Objectifs &amp; midgame</span></div>
+          <div class="pb-card">
+            <ul>
+              <li><b>Pas de wave push = pas d'objectif.</b> À T−60, tu push ta wave pour libérer la rotation.</li>
+              <li>Tous les objectifs ont besoin de la prio mid : c'est ta responsabilité n°1.</li>
+              <li>Après 14 min : tu passes souvent en <b>side lane safe</b> et tu aides à sécuriser la river.</li>
+            </ul>
+          </div>
+        </section>
+        <section class="pb-sec" id="r-mid-4">
+          <div class="pb-h"><span class="n">MID</span><span class="t">Teamfight &amp; tes interdits</span></div>
+          <div class="pb-card">
+            <div class="pb-rule">Malzahar : garde ton <b>R</b> pour le carry ennemi, le jungler autour d'un objectif, ou <b>l'assassin qui dive Jinx</b>.</div>
+            <ul>
+              <li>Protège Jinx si un assassin arrive.</li>
+              <li>Ton R suppress une cible clé — ne le gaspille pas sur une frontline.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="pb-roleview hidden" data-role="adc">
+        <div class="pb-rolehead"><div class="rl">ADC · SDO Kadhafi</div><div class="rt">DPS objectif + teamfight <span>· Jinx / Ashe / Miss Fortune / Seraphine APC</span></div></div>
+        <section class="pb-sec" id="r-adc-1">
+          <div class="pb-h"><span class="n">ADC</span><span class="t">Ton pick &amp; ton job</span></div>
+          <div class="pb-card">
+            <p><b>Jinx</b> · backups Ashe, Miss Fortune, Seraphine APC. Rôle : <b>DPS objectif + teamfight</b>. Ta comp scale très bien.</p>
+            <div class="pb-rule">Ton job : rester en vie, taper l'objectif et la cible devant toi. L'équipe joue autour de toi.</div>
+          </div>
+        </section>
+        <section class="pb-sec" id="r-adc-2">
+          <div class="pb-h"><span class="n">ADC</span><span class="t">Early — la lane la plus importante</span></div>
+          <div class="pb-card">
+            <ul>
+              <li>Arrive direct en lane (pas de leash), last-hit + aide à garder le push : <b>premier niveau 2</b>.</li>
+              <li>Suis l'engage du support sans te mettre en danger. Ennemi niv 2 avant toi → recule.</li>
+              <li>Wave 3 : <b>crash sous tour</b>, puis reset propre.</li>
+            </ul>
+          </div>
+        </section>
+        <section class="pb-sec" id="r-adc-3">
+          <div class="pb-h"><span class="n">ADC</span><span class="t">Objectifs &amp; midgame</span></div>
+          <div class="pb-card">
+            <ul>
+              <li>Sur <b>burn</b> : c'est toi le DPS de l'objectif. Sois présent aux timings.</li>
+              <li>Après 14 min : <b>ADC + support mid</b>, au centre de la map, protégé.</li>
+            </ul>
+            <div class="pb-rule warn">Ne farm <b>jamais</b> seul en side pendant qu'un dragon spawn.</div>
+          </div>
+        </section>
+        <section class="pb-sec" id="r-adc-4">
+          <div class="pb-h"><span class="n">ADC</span><span class="t">Teamfight &amp; tes interdits</span></div>
+          <div class="pb-card">
+            <ul>
+              <li>Tape la <b>cible la plus proche / devant toi</b>. Reste derrière.</li>
+              <li>Ne flash pas en avant, sauf fight déjà gagné.</li>
+              <li>Personne ne chase avant la victoire — toi non plus.</li>
+            </ul>
+            <div class="pb-rule warn">Tu ne <b>facecheck jamais</b>, même pour une ward. Tu ne wards jamais seul.</div>
+          </div>
+        </section>
+      </div>
+
+      <div class="pb-roleview hidden" data-role="supp">
+        <div class="pb-rolehead"><div class="rl">Support · Le Pouj</div><div class="rt">Engage + vision + protection <span>· Leona / Nautilus / Rell / Milio</span></div></div>
+        <section class="pb-sec" id="r-supp-1">
+          <div class="pb-h"><span class="n">SUPP</span><span class="t">Ton pick &amp; ton job</span></div>
+          <div class="pb-card">
+            <p><b>Leona</b> · backups Nautilus, Rell, Milio. Rôle : <b>engage + vision + protection</b>, first-pickable.</p>
+            <div class="pb-rule">Tu ouvres les fights et tu poses la vision qui permet à l'équipe d'arriver avant l'ennemi.</div>
+          </div>
+        </section>
+        <section class="pb-sec" id="r-supp-2">
+          <div class="pb-h"><span class="n">SUPP</span><span class="t">Early — bot &amp; niveau 2</span></div>
+          <div class="pb-card">
+            <ul>
+              <li>Aide à taper les 3 mêlées <b>sans prendre trop de poke</b>.</li>
+              <li>Avant le niveau 2 : avance ; si l'ennemi ne recule pas → <b>engage immédiat</b>.</li>
+              <li>Wave 3 : ward river / tribush après le crash.</li>
+            </ul>
+          </div>
+        </section>
+        <section class="pb-sec" id="r-supp-3">
+          <div class="pb-h"><span class="n">SUPP</span><span class="t">Objectifs &amp; vision</span></div>
+          <div class="pb-card">
+            <table class="pb-table"><tbody>
+              <tr><td class="tm">T−75</td><td>Tu sors avec Oracle / pinks (avec le jungler).</td></tr>
+              <tr><td class="tm">T−45</td><td>Tu poses la vision autour du pit.</td></tr>
+              <tr><td class="tm">T−30</td><td>Tu contrôles les entrées.</td></tr>
+            </tbody></table>
+            <div class="pb-rule warn">Tu ne wards <b>jamais seul</b> : jungle + support ensemble. Roam après crash bot, jamais pendant qu'une grosse wave arrive sur ton ADC.</div>
+          </div>
+        </section>
+        <section class="pb-sec" id="r-supp-4">
+          <div class="pb-h"><span class="n">SUPP</span><span class="t">Teamfight &amp; tes interdits</span></div>
+          <div class="pb-card">
+            <ul>
+              <li><b>Leona / Nautilus</b> : engage — mais <b>pas de flash engage si Jinx est trop loin</b>.</li>
+              <li>Après l'engage initial, reviens <b>protéger Jinx</b>, reste entre elle et l'ennemi.</li>
+            </ul>
+            <div class="pb-rule">Après 14 min, tu es mid avec l'ADC et tu wards autour de mid.</div>
+          </div>
+        </section>
+      </div>
+
+    </div><!-- /pb-main -->
+  </div><!-- /pb-layout -->
 </section>
 
 <footer>
@@ -1373,6 +1623,53 @@ document.getElementById("filters").addEventListener("click", e => {
 const si = document.getElementById("search");
 si.addEventListener("input", e => { query = e.target.value; apply(); });
 document.getElementById("clear").addEventListener("click", () => { si.value=""; query=""; apply(); si.focus(); });
+
+// ---- playbook : vues par rôle + sommaire latéral ----
+const pbRoleBtns = Array.from(document.querySelectorAll(".pb-role-btn"));
+const pbNav = document.getElementById("pb-nav");
+const pbGeneral = document.getElementById("pb-general");
+const pbRoleViews = Array.from(document.querySelectorAll(".pb-roleview"));
+let pbObserver = null;
+
+function pbBuildNav(role){
+  const cont = role==="all" ? pbGeneral : document.querySelector(`.pb-roleview[data-role="${role}"]`);
+  pbNav.innerHTML = "";
+  if(pbObserver){ pbObserver.disconnect(); pbObserver = null; }
+  const map = new Map();
+  const secs = Array.from(cont.querySelectorAll(".pb-sec"));
+  secs.forEach(sec => {
+    const t = sec.querySelector(".pb-h .t");
+    const n = sec.querySelector(".pb-h .n");
+    if(!t) return;
+    const a = document.createElement("a");
+    a.href = "#"+sec.id;
+    if(role==="all" && n){ const s=document.createElement("span"); s.className="ni"; s.textContent=n.textContent; a.appendChild(s); }
+    a.appendChild(document.createTextNode(t.textContent));
+    a.addEventListener("click", ev => { ev.preventDefault(); sec.scrollIntoView({behavior:"smooth", block:"start"}); });
+    pbNav.appendChild(a);
+    map.set(sec, a);
+  });
+  const first = pbNav.querySelector("a"); if(first) first.classList.add("active");
+  pbObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        pbNav.querySelectorAll("a").forEach(x => x.classList.remove("active"));
+        const a = map.get(e.target); if(a) a.classList.add("active");
+      }
+    });
+  }, {rootMargin:"-78px 0px -68% 0px", threshold:0});
+  secs.forEach(sec => pbObserver.observe(sec));
+}
+
+function pbSetRole(role, scroll){
+  pbRoleBtns.forEach(b => b.classList.toggle("active", b.dataset.role===role));
+  pbGeneral.classList.toggle("hidden", role!=="all");
+  pbRoleViews.forEach(v => v.classList.toggle("hidden", v.dataset.role!==role));
+  pbBuildNav(role);
+  if(scroll){ document.querySelector(".pb-layout").scrollIntoView({behavior:"smooth", block:"start"}); }
+}
+pbRoleBtns.forEach(b => b.addEventListener("click", () => pbSetRole(b.dataset.role, true)));
+pbSetRole("all", false);
 
 apply();
 </script>
